@@ -1,0 +1,2 @@
+pyuic5 –x Beta5.ui –o Beta5.py
+auto-py-to-exe
