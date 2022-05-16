@@ -491,10 +491,9 @@ class UiRTFNetwork(object):
         self.label_2.setText("")
         self.label_2.setPixmap(QtGui.QPixmap("images/smallLogo.png"))
         self.label_2.setObjectName("label_2")
-        self.Video = QVideoWidget(self.Camera)
-        self.Video.setGeometry(QtCore.QRect(590, 270, 800, 600))
-        self.Video.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
-        self.Video.setObjectName("Video")
+        self.Cam = QtWidgets.QLabel(self.Camera)
+        self.Cam.setGeometry(QtCore.QRect(360, 330, 1200, 600))
+        self.Cam.setObjectName("Cam")
         self.ExitCamera = QtWidgets.QPushButton(self.Camera)
         self.ExitCamera.setGeometry(QtCore.QRect(1860, 20, 40, 40))
         self.ExitCamera.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -788,6 +787,7 @@ class UiRTFNetwork(object):
         self.LoginEnter.setPlaceholderText(_translate("RTFNetwork", "Логин"))
         self.PasswordEnter.setPlaceholderText(_translate("RTFNetwork", 'Пароль'))
         self.RegBtn.setText(_translate("RTFNetwork", "Зарегистрироваться"))
+        self.Cam.setText(_translate("RTFNetwork", "TextLabel"))
         self.ThisUserWrong.setText(_translate("RTFNetwork", "Такой пользователь уже зарегистрирован!"))
 
 

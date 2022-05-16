@@ -1,13 +1,18 @@
 import sys
 import sqlite3
 import time
+
 from sqlite3 import Cursor, Connection
 
 import cv2
+
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia, QtMultimediaWidgets
 from PyQt5.QtMultimedia import QMediaContent
 from PyQt5.QtMultimediaWidgets import QVideoWidget
 from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtCore import QTimer
+from PyQt5.QtGui import QImage
+from PyQt5.QtGui import QPixmap
 
 from design import *
 
@@ -24,7 +29,6 @@ class MainWindow:
         self.ui.toMenuFromCamera.clicked.connect(self.show_main)
         self.ui.FAQ_btn.clicked.connect(self.show_faq)
         self.ui.Camera_btn.clicked.connect(self.show_camera)
-        # self.ui.Camera_btn.clicked.connect(self.Plays())
         self.ui.ExitFAQ.clicked.connect(QApplication.instance().quit)
         self.ui.ExitAuntification.clicked.connect(QApplication.instance().quit)
         self.ui.ExitMenu.clicked.connect(QApplication.instance().quit)
@@ -33,11 +37,25 @@ class MainWindow:
         self.ui.RegistrationButton.clicked.connect(self.show_registration)
         self.ui.ToAuntificatoinFromReg.clicked.connect(self.show_auntification)
         self.ui.RegBtn.clicked.connect(self.registration)
+        self.timer = QTimer()  # Таймер для камеры
+        self.timer.timeout.connect(self.camera_on)  # Подключаем камеру
+        self.ui.Camera_btn.clicked.connect(self.control_timer)  # Визуализация включение камеры
 
-    def plays(self):
-        self.show_camera()
-        self.media.setMedia(QtMultimedia.QMediaContent(Network(self)))
-        self.media.play()
+    def camera_on(self):
+        ret, image = self.cap.read()
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        # get image infos
+        height, width, channel = image.shape
+        step = channel * width
+        # create QImage from image
+        img = QImage(image.data, width, height, step, QImage.Format_RGB888)
+        # show image in img_label
+        self.ui.Cam.setPixmap(QPixmap.fromImage(img))
+
+    def control_timer(self):
+        if not self.timer.isActive():
+            self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+            self.timer.start(0)
 
     def play(self):
         self.media.play()
