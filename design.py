@@ -492,7 +492,7 @@ class UiRTFNetwork(object):
         self.label_2.setPixmap(QtGui.QPixmap("images/smallLogo.png"))
         self.label_2.setObjectName("label_2")
         self.Cam = QtWidgets.QLabel(self.Camera)
-        self.Cam.setGeometry(QtCore.QRect(360, 330, 1200, 600))
+        self.Cam.setGeometry(QtCore.QRect(340, 330, 781, 551))
         self.Cam.setObjectName("Cam")
         self.ExitCamera = QtWidgets.QPushButton(self.Camera)
         self.ExitCamera.setGeometry(QtCore.QRect(1860, 20, 40, 40))

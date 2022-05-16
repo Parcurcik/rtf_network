@@ -44,18 +44,30 @@ class MainWindow:
     def camera_on(self):
         ret, image = self.cap.read()
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        # get image infos
         height, width, channel = image.shape
         step = channel * width
-        # create QImage from image
         img = QImage(image.data, width, height, step, QImage.Format_RGB888)
-        # show image in img_label
         self.ui.Cam.setPixmap(QPixmap.fromImage(img))
+        self.ui.Cam.setScaledContents(True)
 
     def control_timer(self):
         if not self.timer.isActive():
             self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
             self.timer.start(0)
+
+    def network(self):
+        #ret, frame = video_capture.read()
+        #gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        face_cascade = cv2.CascadeClassifier('cascade/haarcascade_russian_plate_number.xml')
+        plaques = face_cascade.detectMultiScale(gray, 1.3, 5)
+        for i, (x, y, w, h) in enumerate(plaques):
+            roi_color = frame[y:y + h, x:x + w]
+            r = 400.0 / roi_color.shape[1]
+            dim = (400, int(roi_color.shape[0] * r))
+            resized = cv2.resize(roi_color, dim, interpolation=cv2.INTER_AREA)
+            w_resized = resized.shape[0]
+            h_resized = resized.shape[1]
+            frame[100:100 + w_resized, 100:100 + h_resized] = resized
 
     def play(self):
         self.media.play()
@@ -130,29 +142,6 @@ class MainWindow:
         finally:
             cursor.close()
             db.close()
-
-
-face_cascade = cv2.CascadeClassifier('cascade/haarcascade_russian_plate_number.xml')
-
-
-def network():
-    video_capture = cv2.VideoCapture(0)
-
-    while True:
-        ret, frame = video_capture.read()
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-        plaques = face_cascade.detectMultiScale(gray, 1.3, 5)
-        for i, (x, y, w, h) in enumerate(plaques):
-            roi_color = frame[y:y + h, x:x + w]
-
-            r = 400.0 / roi_color.shape[1]
-            dim = (400, int(roi_color.shape[0] * r))
-            resized = cv2.resize(roi_color, dim, interpolation=cv2.INTER_AREA)
-            w_resized = resized.shape[0]
-            h_resized = resized.shape[1]
-
-            frame[100:100 + w_resized, 100:100 + h_resized] = resized
 
 
 if __name__ == '__main__':
