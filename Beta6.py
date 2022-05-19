@@ -70,8 +70,8 @@ class MainWindow:
             self.timer.start(0)
 
     def network(self):
-        #ret, frame = video_capture.read()
-        #gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        # ret, frame = video_capture.read()
+        # gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         face_cascade = cv2.CascadeClassifier('cascade/haarcascade_russian_plate_number.xml')
         plaques = face_cascade.detectMultiScale(gray, 1.3, 5)
         for i, (x, y, w, h) in enumerate(plaques):

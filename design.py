@@ -1,25 +1,22 @@
 import sys
 import sqlite3
-import time
 import hashlib
 from sqlite3 import Cursor, Connection
 
-import cv2
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia, QtMultimediaWidgets
 from PyQt5.QtCore import QUrl
 from PyQt5.QtMultimedia import QMediaContent
 from PyQt5.QtMultimediaWidgets import QVideoWidget
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_RTFNetwork(object):
-    def setup_ui(self, RTFNetwork):
-        RTFNetwork.setObjectName("RTFNetwork")
-        RTFNetwork.resize(1920, 1080)
-        self.centralwidget = QtWidgets.QWidget(RTFNetwork)
+    def setup_ui(self, rtf_network):
+        rtf_network.setObjectName("RTFNetwork")
+        rtf_network.resize(1920, 1080)
+        self.centralwidget = QtWidgets.QWidget(rtf_network)
         self.centralwidget.setObjectName("centralwidget")
         self.stackedWidget = QtWidgets.QStackedWidget(self.centralwidget)
         self.stackedWidget.setGeometry(QtCore.QRect(0, 0, 1920, 1080))
@@ -47,41 +44,43 @@ class Ui_RTFNetwork(object):
         self.OutorIn.setGeometry(QtCore.QRect(785, 800, 350, 100))
         self.OutorIn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.OutorIn.setStyleSheet("QPushButton {\n"
-"position: absolute;\n"
-"width: 350px;\n"
-"height: 100px;\n"
-"left: 785px;\n"
-"top: 800px;\n"
-"\n"
-"position: absolute;\n"
-"width: 136px;\n"
-"height: 55px;\n"
-"left: 892px;\n"
-"top: 823px;\n"
-"\n"
-"font-family: \'SF Pro Display\';\n"
-"font-style: italic;\n"
-"font-weight: 600;\n"
-"font-size: 46px;\n"
-"line-height: 55px;\n"
-"/* identical to box height */\n"
-"\n"
-"display: flex;\n"
-"align-items: center;\n"
-"text-align: center;\n"
-"letter-spacing: 0.03em;\n"
-"\n"
-"color: #FFFFFF;\n"
-"\n"
-"background:qlineargradient(spread:pad, x1:0.169, y1:0.0180455, x2:0.791, y2:0.836, stop:0 rgba(105, 246, 255, 255), stop:1 rgba(67, 58, 166, 255));\n"
-"border: 1px solid #C4C4C4;\n"
-"box-sizing: border-box;\n"
-"border-radius: 25px;\n"
-"}\n"
-"\n"
-"QPushButton:pressed{\n"
-"    background-color:qlineargradient(spread:pad, x1:1, y1:0.478, x2:0, y2:0.466, stop:0 rgba(67, 58, 166, 255), stop:1 rgba(67, 58, 166, 255)); \n"
-"}")
+                                   "position: absolute;\n"
+                                   "width: 350px;\n"
+                                   "height: 100px;\n"
+                                   "left: 785px;\n"
+                                   "top: 800px;\n"
+                                   "\n"
+                                   "position: absolute;\n"
+                                   "width: 136px;\n"
+                                   "height: 55px;\n"
+                                   "left: 892px;\n"
+                                   "top: 823px;\n"
+                                   "\n"
+                                   "font-family: \'SF Pro Display\';\n"
+                                   "font-style: italic;\n"
+                                   "font-weight: 600;\n"
+                                   "font-size: 46px;\n"
+                                   "line-height: 55px;\n"
+                                   "/* identical to box height */\n"
+                                   "\n"
+                                   "display: flex;\n"
+                                   "align-items: center;\n"
+                                   "text-align: center;\n"
+                                   "letter-spacing: 0.03em;\n"
+                                   "\n"
+                                   "color: #FFFFFF;\n"
+                                   "\n"
+                                   "background:qlineargradient(spread:pad, x1:0.169, y1:0.0180455, x2:0.791, "
+                                   "y2:0.836, stop:0 rgba(105, 246, 255, 255), stop:1 rgba(67, 58, 166, 255));\n "
+                                   "border: 1px solid #C4C4C4;\n"
+                                   "box-sizing: border-box;\n"
+                                   "border-radius: 25px;\n"
+                                   "}\n"
+                                   "\n"
+                                   "QPushButton:pressed{\n"
+                                   "background-color:qlineargradient(spread:pad, x1:1, y1:0.478, x2:0, y2:0.466, "
+                                   "stop:0 rgba(67, 58, 166, 255), stop:1 rgba(67, 58, 166, 255)); \n "
+                                   "}")
         self.OutorIn.setObjectName("OutorIn")
         self.Question = QtWidgets.QLabel(self.Auntification)
         self.Question.setGeometry(QtCore.QRect(150, 1001, 246, 29))
@@ -103,19 +102,19 @@ class Ui_RTFNetwork(object):
         self.Login.setToolTipDuration(3)
         self.Login.setAutoFillBackground(False)
         self.Login.setStyleSheet("QLineEdit {\n"
-"position: absolute;\n"
-"width: 450px;\n"
-"height: 75px;\n"
-"left: 735px;\n"
-"top: 550px;\n"
-"padding-left: 40px;\n"
-"padding-right: 80px;\n"
-"\n"
-"background: #FFFFFF;\n"
-"border: 1px solid #C4C4C4;\n"
-"box-sizing: border-box;\n"
-"border-radius: 10px;\n"
-"}")
+                                 "position: absolute;\n"
+                                 "width: 450px;\n"
+                                 "height: 75px;\n"
+                                 "left: 735px;\n"
+                                 "top: 550px;\n"
+                                 "padding-left: 40px;\n"
+                                 "padding-right: 80px;\n"
+                                 "\n"
+                                 "background: #FFFFFF;\n"
+                                 "border: 1px solid #C4C4C4;\n"
+                                 "box-sizing: border-box;\n"
+                                 "border-radius: 10px;\n"
+                                 "}")
         self.Login.setText("")
         self.Login.setCursorPosition(0)
         self.Login.setCursorMoveStyle(QtCore.Qt.LogicalMoveStyle)
@@ -148,20 +147,20 @@ class Ui_RTFNetwork(object):
         self.Password.setFont(font)
         self.Password.setToolTipDuration(3)
         self.Password.setStyleSheet("QLineEdit {\n"
-"position: absolute;\n"
-"width: 450px;\n"
-"height: 75px;\n"
-"left: 735px;\n"
-"top: 550px;\n"
-"padding-left: 40px;\n"
-"padding-right: 80px;\n"
-"\n"
-"\n"
-"background: #FFFFFF;\n"
-"border: 1px solid #C4C4C4;\n"
-"box-sizing: border-box;\n"
-"border-radius: 10px;\n"
-"}")
+                                    "position: absolute;\n"
+                                    "width: 450px;\n"
+                                    "height: 75px;\n"
+                                    "left: 735px;\n"
+                                    "top: 550px;\n"
+                                    "padding-left: 40px;\n"
+                                    "padding-right: 80px;\n"
+                                    "\n"
+                                    "\n"
+                                    "background: #FFFFFF;\n"
+                                    "border: 1px solid #C4C4C4;\n"
+                                    "box-sizing: border-box;\n"
+                                    "border-radius: 10px;\n"
+                                    "}")
         self.Password.setText("")
         self.Password.setEchoMode(QtWidgets.QLineEdit.Password)
         self.Password.setObjectName("Password")
@@ -174,8 +173,8 @@ class Ui_RTFNetwork(object):
         self.ExitAuntification.setGeometry(QtCore.QRect(1860, 20, 40, 40))
         self.ExitAuntification.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.ExitAuntification.setStyleSheet("QPushButton{\n"
-"border-radius: 1px\n"
-"}")
+                                             "border-radius: 1px\n"
+                                             "}")
         self.ExitAuntification.setText("")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("images/cross-svgrepo-com.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -187,8 +186,8 @@ class Ui_RTFNetwork(object):
         self.RegistrationButton.setGeometry(QtCore.QRect(450, 992, 272, 38))
         self.RegistrationButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.RegistrationButton.setStyleSheet("QPushButton{\n"
-"border-radius: 1px\n"
-"}")
+                                              "border-radius: 1px\n"
+                                              "}")
         self.RegistrationButton.setText("")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("images/Зарегистрируйтесь.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -251,17 +250,19 @@ class Ui_RTFNetwork(object):
         self.Parking_btn.setGeometry(QtCore.QRect(200, 415, 250, 250))
         self.Parking_btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.Parking_btn.setStyleSheet("QPushButton{\n"
-"position: absolute;\n"
-"width: 250px;\n"
-"height: 250px;\n"
-"left: calc(50% - 250px/2 - 635px);\n"
-"top: 415px;\n"
-"border-radius: 30px;\n"
-"background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, stop:0 rgba(74, 137, 211, 0.9), stop:1 rgba(18, 27, 116, 0.9));\n"
-"}\n"
-"QPushButton:pressed{\n"
-"background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, stop:0 rgba(79, 85, 142, 255), stop:1 rgba(67, 58, 166, 255))\n"
-"}")
+                                       "position: absolute;\n"
+                                       "width: 250px;\n"
+                                       "height: 250px;\n"
+                                       "left: calc(50% - 250px/2 - 635px);\n"
+                                       "top: 415px;\n"
+                                       "border-radius: 30px;\n"
+                                       "background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, "
+                                       "stop:0 rgba(74, 137, 211, 0.9), stop:1 rgba(18, 27, 116, 0.9));\n "
+                                       "}\n"
+                                       "QPushButton:pressed{\n"
+                                       "background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, "
+                                       "stop:0 rgba(79, 85, 142, 255), stop:1 rgba(67, 58, 166, 255))\n "
+                                       "}")
         self.Parking_btn.setText("")
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap("images/Парковка.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -272,17 +273,19 @@ class Ui_RTFNetwork(object):
         self.Data_btn.setGeometry(QtCore.QRect(1152, 415, 250, 250))
         self.Data_btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.Data_btn.setStyleSheet("QPushButton{\n"
-"position: absolute;\n"
-"width: 250px;\n"
-"height: 250px;\n"
-"left: calc(50% - 250px/2 - 635px);\n"
-"top: 415px;\n"
-"border-radius: 30px;\n"
-"background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, stop:0 rgba(74, 137, 211, 0.9), stop:1 rgba(18, 27, 116, 0.9));\n"
-"}\n"
-"QPushButton:pressed{\n"
-"background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, stop:0 rgba(79, 85, 142, 255), stop:1 rgba(67, 58, 166, 255))\n"
-"}")
+                                    "position: absolute;\n"
+                                    "width: 250px;\n"
+                                    "height: 250px;\n"
+                                    "left: calc(50% - 250px/2 - 635px);\n"
+                                    "top: 415px;\n"
+                                    "border-radius: 30px;\n"
+                                    "background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, "
+                                    "stop:0 rgba(74, 137, 211, 0.9), stop:1 rgba(18, 27, 116, 0.9));\n "
+                                    "}\n"
+                                    "QPushButton:pressed{\n"
+                                    "background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, "
+                                    "stop:0 rgba(79, 85, 142, 255), stop:1 rgba(67, 58, 166, 255))\n "
+                                    "}")
         self.Data_btn.setText("")
         icon3 = QtGui.QIcon()
         icon3.addPixmap(QtGui.QPixmap("images/Data.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -293,18 +296,20 @@ class Ui_RTFNetwork(object):
         self.Number_btn.setGeometry(QtCore.QRect(834, 415, 250, 250))
         self.Number_btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.Number_btn.setStyleSheet("QPushButton{\n"
-"position: absolute;\n"
-"width: 250px;\n"
-"height: 250px;\n"
-"left: calc(50% - 250px/2 - 635px);\n"
-"top: 415px;\n"
-"border-radius: 30px;\n"
-"background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, stop:0 rgba(74, 137, 211, 0.9), stop:1 rgba(18, 27, 116, 0.9));\n"
-"}\n"
-"QPushButton:pressed{\n"
-"background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, stop:0 rgba(79, 85, 142, 255), stop:1 rgba(67, 58, 166, 255))\n"
-"}\n"
-"")
+                                      "position: absolute;\n"
+                                      "width: 250px;\n"
+                                      "height: 250px;\n"
+                                      "left: calc(50% - 250px/2 - 635px);\n"
+                                      "top: 415px;\n"
+                                      "border-radius: 30px;\n"
+                                      "background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, "
+                                      "stop:0 rgba(74, 137, 211, 0.9), stop:1 rgba(18, 27, 116, 0.9));\n "
+                                      "}\n"
+                                      "QPushButton:pressed{\n"
+                                      "background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, "
+                                      "stop:0 rgba(79, 85, 142, 255), stop:1 rgba(67, 58, 166, 255))\n "
+                                      "}\n"
+                                      "")
         self.Number_btn.setText("")
         icon4 = QtGui.QIcon()
         icon4.addPixmap(QtGui.QPixmap("images/Group 8.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -315,17 +320,19 @@ class Ui_RTFNetwork(object):
         self.FAQ_btn.setGeometry(QtCore.QRect(1470, 415, 250, 250))
         self.FAQ_btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.FAQ_btn.setStyleSheet("QPushButton{\n"
-"position: absolute;\n"
-"width: 250px;\n"
-"height: 250px;\n"
-"left: calc(50% - 250px/2 - 635px);\n"
-"top: 415px;\n"
-"border-radius: 30px;\n"
-"background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, stop:0 rgba(74, 137, 211, 0.9), stop:1 rgba(18, 27, 116, 0.9));\n"
-"}\n"
-"QPushButton:pressed{\n"
-"background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, stop:0 rgba(79, 85, 142, 255), stop:1 rgba(67, 58, 166, 255))\n"
-"}")
+                                   "position: absolute;\n"
+                                   "width: 250px;\n"
+                                   "height: 250px;\n"
+                                   "left: calc(50% - 250px/2 - 635px);\n"
+                                   "top: 415px;\n"
+                                   "border-radius: 30px;\n"
+                                   "background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, "
+                                   "stop:0 rgba(74, 137, 211, 0.9), stop:1 rgba(18, 27, 116, 0.9));\n "
+                                   "}\n"
+                                   "QPushButton:pressed{\n"
+                                   "background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, "
+                                   "stop:0 rgba(79, 85, 142, 255), stop:1 rgba(67, 58, 166, 255))\n "
+                                   "}")
         self.FAQ_btn.setText("")
         icon5 = QtGui.QIcon()
         icon5.addPixmap(QtGui.QPixmap("images/FAQ.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -336,17 +343,19 @@ class Ui_RTFNetwork(object):
         self.Camera_btn.setGeometry(QtCore.QRect(517, 415, 250, 250))
         self.Camera_btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.Camera_btn.setStyleSheet("QPushButton{\n"
-"position: absolute;\n"
-"width: 250px;\n"
-"height: 250px;\n"
-"left: calc(50% - 250px/2 - 635px);\n"
-"top: 415px;\n"
-"border-radius: 30px;\n"
-"background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, stop:0 rgba(74, 137, 211, 0.9), stop:1 rgba(18, 27, 116, 0.9));\n"
-"}\n"
-"QPushButton:pressed{\n"
-"background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, stop:0 rgba(79, 85, 142, 255), stop:1 rgba(67, 58, 166, 255))\n"
-"}")
+                                      "position: absolute;\n"
+                                      "width: 250px;\n"
+                                      "height: 250px;\n"
+                                      "left: calc(50% - 250px/2 - 635px);\n"
+                                      "top: 415px;\n"
+                                      "border-radius: 30px;\n"
+                                      "background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, "
+                                      "stop:0 rgba(74, 137, 211, 0.9), stop:1 rgba(18, 27, 116, 0.9));\n "
+                                      "}\n"
+                                      "QPushButton:pressed{\n"
+                                      "background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, "
+                                      "stop:0 rgba(79, 85, 142, 255), stop:1 rgba(67, 58, 166, 255))\n "
+                                      "}")
         self.Camera_btn.setText("")
         icon6 = QtGui.QIcon()
         icon6.addPixmap(QtGui.QPixmap("images/Group 7.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -364,8 +373,8 @@ class Ui_RTFNetwork(object):
         self.User.setFont(font)
         self.User.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.User.setStyleSheet("QLineEdit{\n"
-"background:rgb(240, 240, 240)\n"
-"}")
+                                "background:rgb(240, 240, 240)\n"
+                                "}")
         self.User.setFrame(False)
         self.User.setReadOnly(True)
         self.User.setObjectName("User")
@@ -373,8 +382,8 @@ class Ui_RTFNetwork(object):
         self.ExitMenu.setGeometry(QtCore.QRect(1860, 20, 40, 40))
         self.ExitMenu.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.ExitMenu.setStyleSheet("QPushButton{\n"
-"border-radius: 1px\n"
-"}")
+                                    "border-radius: 1px\n"
+                                    "}")
         self.ExitMenu.setText("")
         self.ExitMenu.setIcon(icon)
         self.ExitMenu.setIconSize(QtCore.QSize(40, 40))
@@ -401,13 +410,13 @@ class Ui_RTFNetwork(object):
         self.toMenuFromFAQ.setAcceptDrops(False)
         self.toMenuFromFAQ.setAutoFillBackground(False)
         self.toMenuFromFAQ.setStyleSheet("QPushButton{\n"
-"position: absolute;\n"
-"width: 50px;\n"
-"height: 50px;\n"
-"left: 200px;\n"
-"top: 100px;\n"
-"border-radius: 15px;\n"
-"}")
+                                         "position: absolute;\n"
+                                         "width: 50px;\n"
+                                         "height: 50px;\n"
+                                         "left: 200px;\n"
+                                         "top: 100px;\n"
+                                         "border-radius: 15px;\n"
+                                         "}")
         self.toMenuFromFAQ.setText("")
         icon7 = QtGui.QIcon()
         icon7.addPixmap(QtGui.QPixmap("images/arrowToMenu.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -451,8 +460,8 @@ class Ui_RTFNetwork(object):
         self.ExitFAQ.setGeometry(QtCore.QRect(1860, 20, 40, 40))
         self.ExitFAQ.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.ExitFAQ.setStyleSheet("QPushButton{\n"
-"border-radius: 1px\n"
-"}")
+                                   "border-radius: 1px\n"
+                                   "}")
         self.ExitFAQ.setText("")
         self.ExitFAQ.setIcon(icon)
         self.ExitFAQ.setIconSize(QtCore.QSize(40, 40))
@@ -465,13 +474,13 @@ class Ui_RTFNetwork(object):
         self.toMenuFromCamera.setGeometry(QtCore.QRect(200, 100, 50, 50))
         self.toMenuFromCamera.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toMenuFromCamera.setStyleSheet("QPushButton{\n"
-"position: absolute;\n"
-"width: 50px;\n"
-"height: 50px;\n"
-"left: 200px;\n"
-"top: 100px;\n"
-"border-radius: 15px;\n"
-"}")
+                                            "position: absolute;\n"
+                                            "width: 50px;\n"
+                                            "height: 50px;\n"
+                                            "left: 200px;\n"
+                                            "top: 100px;\n"
+                                            "border-radius: 15px;\n"
+                                            "}")
         self.toMenuFromCamera.setText("")
         icon8 = QtGui.QIcon()
         icon8.addPixmap(QtGui.QPixmap("images/ToMenu.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -493,8 +502,8 @@ class Ui_RTFNetwork(object):
         self.ExitCamera.setGeometry(QtCore.QRect(1860, 20, 40, 40))
         self.ExitCamera.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.ExitCamera.setStyleSheet("QPushButton{\n"
-"border-radius: 1px\n"
-"}")
+                                      "border-radius: 1px\n"
+                                      "}")
         self.ExitCamera.setText("")
         self.ExitCamera.setIcon(icon)
         self.ExitCamera.setIconSize(QtCore.QSize(40, 40))
@@ -515,8 +524,8 @@ class Ui_RTFNetwork(object):
         self.ExitNumbers.setGeometry(QtCore.QRect(1860, 20, 40, 40))
         self.ExitNumbers.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.ExitNumbers.setStyleSheet("QPushButton{\n"
-"border-radius: 1px\n"
-"}")
+                                       "border-radius: 1px\n"
+                                       "}")
         self.ExitNumbers.setText("")
         self.ExitNumbers.setIcon(icon)
         self.ExitNumbers.setIconSize(QtCore.QSize(40, 40))
@@ -526,13 +535,13 @@ class Ui_RTFNetwork(object):
         self.toMenuFromNumbers.setGeometry(QtCore.QRect(200, 100, 50, 50))
         self.toMenuFromNumbers.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toMenuFromNumbers.setStyleSheet("QPushButton{\n"
-"position: absolute;\n"
-"width: 50px;\n"
-"height: 50px;\n"
-"left: 200px;\n"
-"top: 100px;\n"
-"border-radius: 15px;\n"
-"}")
+                                             "position: absolute;\n"
+                                             "width: 50px;\n"
+                                             "height: 50px;\n"
+                                             "left: 200px;\n"
+                                             "top: 100px;\n"
+                                             "border-radius: 15px;\n"
+                                             "}")
         self.toMenuFromNumbers.setText("")
         self.toMenuFromNumbers.setIcon(icon8)
         self.toMenuFromNumbers.setIconSize(QtCore.QSize(50, 50))
@@ -544,7 +553,7 @@ class Ui_RTFNetwork(object):
         self.smallLogo_4.setPixmap(QtGui.QPixmap("images/smallLogo.png"))
         self.smallLogo_4.setObjectName("smallLogo_4")
         self.historyDate_2 = QtWidgets.QLineEdit(self.Numbers)
-        self.historyDate_2.setGeometry(QtCore.QRect(960, 640, 550, 75))
+        self.historyDate_2.setGeometry(QtCore.QRect(689, 616, 550, 75))
         font = QtGui.QFont()
         font.setFamily("SF Pro Display")
         font.setPointSize(16)
@@ -552,32 +561,37 @@ class Ui_RTFNetwork(object):
         font.setWeight(75)
         self.historyDate_2.setFont(font)
         self.historyDate_2.setStyleSheet("QLineEdit {\n"
-"position: absolute;\n"
-"width: 550px;\n"
-"height: 75px;\n"
-"left: calc(50% - 550px/2 + 385px);\n"
-"top: 578px;\n"
-"padding-left: 40px;\n"
-"padding-right: 80px;\n"
-"\n"
-"background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0.826, y2:0.745364, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(67, 58, 166, 255));\n"
-"border-radius: 15px;\n"
-"\n"
-"color: #FFFFFF;\n"
-"}")
+                                         "position: absolute;\n"
+                                         "width: 550px;\n"
+                                         "height: 75px;\n"
+                                         "left: calc(50% - 550px/2 + 385px);\n"
+                                         "top: 578px;\n"
+                                         "padding-left: 40px;\n"
+                                         "padding-right: 80px;\n"
+                                         "\n"
+                                         "background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0.826, "
+                                         "y2:0.745364, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(67, 58, 166, "
+                                         "255));\n "
+                                         "border-radius: 15px;\n"
+                                         "\n"
+                                         "color: #FFFFFF;\n"
+                                         "}")
         self.historyDate_2.setText("")
         self.historyDate_2.setFrame(False)
         self.historyDate_2.setClearButtonEnabled(False)
         self.historyDate_2.setObjectName("historyDate_2")
         self.searchButton = QtWidgets.QPushButton(self.Numbers)
-        self.searchButton.setGeometry(QtCore.QRect(1450, 657, 40, 40))
+        self.searchButton.setGeometry(QtCore.QRect(1180, 630, 40, 40))
         self.searchButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.searchButton.setStyleSheet("QPushButton{\n"
-"\n"
-"background:qradialgradient(spread:pad, cx:0.6, cy:0.829545, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 235, 235, 0), stop:0.35 rgba(255, 188, 188, 0), stop:0.517413 rgba(252, 128, 128, 0), stop:0.721393 rgba(255, 132, 132, 0), stop:0.865672 rgba(255, 162, 162, 0), stop:1 rgba(255, 255, 255, 0));\n"
-"\n"
-"border-radius: 1px;\n"
-"}")
+                                        "\n"
+                                        "background:qradialgradient(spread:pad, cx:0.6, cy:0.829545, radius:0.5, "
+                                        "fx:0.5, fy:0.5, stop:0 rgba(255, 235, 235, 0), stop:0.35 rgba(255, 188, 188, "
+                                        "0), stop:0.517413 rgba(252, 128, 128, 0), stop:0.721393 rgba(255, 132, 132, "
+                                        "0), stop:0.865672 rgba(255, 162, 162, 0), stop:1 rgba(255, 255, 255, 0));\n "
+                                        "\n"
+                                        "border-radius: 1px;\n"
+                                        "}")
         self.searchButton.setText("")
         icon9 = QtGui.QIcon()
         icon9.addPixmap(QtGui.QPixmap("images/Scope.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -585,7 +599,7 @@ class Ui_RTFNetwork(object):
         self.searchButton.setIconSize(QtCore.QSize(40, 40))
         self.searchButton.setObjectName("searchButton")
         self.label = QtWidgets.QLabel(self.Numbers)
-        self.label.setGeometry(QtCore.QRect(1125, 590, 248, 38))
+        self.label.setGeometry(QtCore.QRect(850, 560, 248, 38))
         self.label.setText("")
         self.label.setPixmap(QtGui.QPixmap("images/SearchText.svg"))
         self.label.setObjectName("label")
@@ -596,13 +610,13 @@ class Ui_RTFNetwork(object):
         self.toMenuFromParking.setGeometry(QtCore.QRect(200, 100, 50, 50))
         self.toMenuFromParking.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toMenuFromParking.setStyleSheet("QPushButton{\n"
-"position: absolute;\n"
-"width: 50px;\n"
-"height: 50px;\n"
-"left: 200px;\n"
-"top: 100px;\n"
-"border-radius: 15px;\n"
-"}")
+                                             "position: absolute;\n"
+                                             "width: 50px;\n"
+                                             "height: 50px;\n"
+                                             "left: 200px;\n"
+                                             "top: 100px;\n"
+                                             "border-radius: 15px;\n"
+                                             "}")
         self.toMenuFromParking.setText("")
         icon10 = QtGui.QIcon()
         icon10.addPixmap(QtGui.QPixmap("images/arrowToMenu.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -658,11 +672,15 @@ class Ui_RTFNetwork(object):
         font.setWeight(75)
         self.countOfCarsInPark.setFont(font)
         self.countOfCarsInPark.setStyleSheet("QLineEdit{\n"
-"\n"
-"background:qradialgradient(spread:pad, cx:0.6, cy:0.829545, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 235, 235, 0), stop:0.35 rgba(255, 188, 188, 0), stop:0.517413 rgba(252, 128, 128, 0), stop:0.721393 rgba(255, 132, 132, 0), stop:0.865672 rgba(255, 162, 162, 0), stop:1 rgba(255, 255, 255, 0));\n"
-"\n"
-"color: #FFFFFF;\n"
-"}")
+                                             "\n"
+                                             "background:qradialgradient(spread:pad, cx:0.6, cy:0.829545, radius:0.5, "
+                                             "fx:0.5, fy:0.5, stop:0 rgba(255, 235, 235, 0), stop:0.35 rgba(255, 188, "
+                                             "188, 0), stop:0.517413 rgba(252, 128, 128, 0), stop:0.721393 rgba(255, "
+                                             "132, 132, 0), stop:0.865672 rgba(255, 162, 162, 0), stop:1 rgba(255, "
+                                             "255, 255, 0));\n "
+                                             "\n"
+                                             "color: #FFFFFF;\n"
+                                             "}")
         self.countOfCarsInPark.setText("")
         self.countOfCarsInPark.setFrame(False)
         self.countOfCarsInPark.setAlignment(QtCore.Qt.AlignCenter)
@@ -676,11 +694,15 @@ class Ui_RTFNetwork(object):
         font.setWeight(50)
         self.percentOfCarsInPark.setFont(font)
         self.percentOfCarsInPark.setStyleSheet("QLineEdit{\n"
-"\n"
-"background:qradialgradient(spread:pad, cx:0.6, cy:0.829545, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 235, 235, 0), stop:0.35 rgba(255, 188, 188, 0), stop:0.517413 rgba(252, 128, 128, 0), stop:0.721393 rgba(255, 132, 132, 0), stop:0.865672 rgba(255, 162, 162, 0), stop:1 rgba(255, 255, 255, 0));\n"
-"\n"
-"color: #FFFFFF;\n"
-"}")
+                                               "\n"
+                                               "background:qradialgradient(spread:pad, cx:0.6, cy:0.829545, "
+                                               "radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 235, 235, 0), "
+                                               "stop:0.35 rgba(255, 188, 188, 0), stop:0.517413 rgba(252, 128, 128, "
+                                               "0), stop:0.721393 rgba(255, 132, 132, 0), stop:0.865672 rgba(255, "
+                                               "162, 162, 0), stop:1 rgba(255, 255, 255, 0));\n "
+                                               "\n"
+                                               "color: #FFFFFF;\n"
+                                               "}")
         self.percentOfCarsInPark.setText("")
         self.percentOfCarsInPark.setFrame(False)
         self.percentOfCarsInPark.setAlignment(QtCore.Qt.AlignCenter)
@@ -694,13 +716,17 @@ class Ui_RTFNetwork(object):
         font.setWeight(75)
         self.countOfFreePark.setFont(font)
         self.countOfFreePark.setStyleSheet("QLineEdit{\n"
-"\n"
-"background:qradialgradient(spread:pad, cx:0.6, cy:0.829545, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 235, 235, 0), stop:0.35 rgba(255, 188, 188, 0), stop:0.517413 rgba(252, 128, 128, 0), stop:0.721393 rgba(255, 132, 132, 0), stop:0.865672 rgba(255, 162, 162, 0), stop:1 rgba(255, 255, 255, 0));\n"
-"\n"
-"color: #FFFFFF;\n"
-"\n"
-"text: center;\n"
-"}")
+                                           "\n"
+                                           "background:qradialgradient(spread:pad, cx:0.6, cy:0.829545, radius:0.5, "
+                                           "fx:0.5, fy:0.5, stop:0 rgba(255, 235, 235, 0), stop:0.35 rgba(255, 188, "
+                                           "188, 0), stop:0.517413 rgba(252, 128, 128, 0), stop:0.721393 rgba(255, "
+                                           "132, 132, 0), stop:0.865672 rgba(255, 162, 162, 0), stop:1 rgba(255, 255, "
+                                           "255, 0));\n "
+                                           "\n"
+                                           "color: #FFFFFF;\n"
+                                           "\n"
+                                           "text: center;\n"
+                                           "}")
         self.countOfFreePark.setText("")
         self.countOfFreePark.setFrame(False)
         self.countOfFreePark.setAlignment(QtCore.Qt.AlignCenter)
@@ -714,11 +740,15 @@ class Ui_RTFNetwork(object):
         font.setWeight(50)
         self.percentOfFreePark.setFont(font)
         self.percentOfFreePark.setStyleSheet("QLineEdit{\n"
-"\n"
-"background:qradialgradient(spread:pad, cx:0.6, cy:0.829545, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 235, 235, 0), stop:0.35 rgba(255, 188, 188, 0), stop:0.517413 rgba(252, 128, 128, 0), stop:0.721393 rgba(255, 132, 132, 0), stop:0.865672 rgba(255, 162, 162, 0), stop:1 rgba(255, 255, 255, 0));\n"
-"\n"
-"color: #FFFFFF;\n"
-"}")
+                                             "\n"
+                                             "background:qradialgradient(spread:pad, cx:0.6, cy:0.829545, radius:0.5, "
+                                             "fx:0.5, fy:0.5, stop:0 rgba(255, 235, 235, 0), stop:0.35 rgba(255, 188, "
+                                             "188, 0), stop:0.517413 rgba(252, 128, 128, 0), stop:0.721393 rgba(255, "
+                                             "132, 132, 0), stop:0.865672 rgba(255, 162, 162, 0), stop:1 rgba(255, "
+                                             "255, 255, 0));\n "
+                                             "\n"
+                                             "color: #FFFFFF;\n"
+                                             "}")
         self.percentOfFreePark.setText("")
         self.percentOfFreePark.setFrame(False)
         self.percentOfFreePark.setAlignment(QtCore.Qt.AlignCenter)
@@ -730,13 +760,13 @@ class Ui_RTFNetwork(object):
         self.toMenuFromCache.setGeometry(QtCore.QRect(200, 100, 50, 50))
         self.toMenuFromCache.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.toMenuFromCache.setStyleSheet("QPushButton{\n"
-"position: absolute;\n"
-"width: 50px;\n"
-"height: 50px;\n"
-"left: 200px;\n"
-"top: 100px;\n"
-"border-radius: 15px;\n"
-"}")
+                                           "position: absolute;\n"
+                                           "width: 50px;\n"
+                                           "height: 50px;\n"
+                                           "left: 200px;\n"
+                                           "top: 100px;\n"
+                                           "border-radius: 15px;\n"
+                                           "}")
         self.toMenuFromCache.setText("")
         self.toMenuFromCache.setIcon(icon10)
         self.toMenuFromCache.setIconSize(QtCore.QSize(50, 50))
@@ -756,20 +786,22 @@ class Ui_RTFNetwork(object):
         self.CleanCache.setGeometry(QtCore.QRect(400, 300, 500, 500))
         self.CleanCache.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.CleanCache.setStyleSheet("QPushButton{\n"
-"position: absolute;\n"
-"border-radius: 250px;\n"
-"min-height: 500px;\n"
-"max-height: 500px;\n"
-"min-width: 500px;\n"
-"max-width: 500px;\n"
-"background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, stop:0 rgba(74, 137, 211, 0.9), stop:1 rgba(18, 27, 116, 0.9));\n"
-"\n"
-"}\n"
-"QPushButton:pressed{\n"
-"background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, stop:0 rgba(79, 85, 142, 255), stop:1 rgba(67, 58, 166, 255))\n"
-"}\n"
-"\n"
-"")
+                                      "position: absolute;\n"
+                                      "border-radius: 250px;\n"
+                                      "min-height: 500px;\n"
+                                      "max-height: 500px;\n"
+                                      "min-width: 500px;\n"
+                                      "max-width: 500px;\n"
+                                      "background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, "
+                                      "stop:0 rgba(74, 137, 211, 0.9), stop:1 rgba(18, 27, 116, 0.9));\n "
+                                      "\n"
+                                      "}\n"
+                                      "QPushButton:pressed{\n"
+                                      "background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, "
+                                      "stop:0 rgba(79, 85, 142, 255), stop:1 rgba(67, 58, 166, 255))\n "
+                                      "}\n"
+                                      "\n"
+                                      "")
         self.CleanCache.setText("")
         icon12 = QtGui.QIcon()
         icon12.addPixmap(QtGui.QPixmap("images/cleanCache.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -805,19 +837,20 @@ class Ui_RTFNetwork(object):
         font.setWeight(75)
         self.historyDate.setFont(font)
         self.historyDate.setStyleSheet("QLineEdit {\n"
-"position: absolute;\n"
-"width: 550px;\n"
-"height: 75px;\n"
-"left: calc(50% - 550px/2 + 385px);\n"
-"top: 578px;\n"
-"padding-left: 40px;\n"
-"padding-right: 80px;\n"
-"\n"
-"background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0.826, y2:0.745364, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(67, 58, 166, 255));\n"
-"border-radius: 15px;\n"
-"\n"
-"color: #FFFFFF;\n"
-"}")
+                                       "position: absolute;\n"
+                                       "width: 550px;\n"
+                                       "height: 75px;\n"
+                                       "left: calc(50% - 550px/2 + 385px);\n"
+                                       "top: 578px;\n"
+                                       "padding-left: 40px;\n"
+                                       "padding-right: 80px;\n"
+                                       "\n"
+                                       "background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0.826, "
+                                       "y2:0.745364, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(67, 58, 166, 255));\n "
+                                       "border-radius: 15px;\n"
+                                       "\n"
+                                       "color: #FFFFFF;\n"
+                                       "}")
         self.historyDate.setFrame(False)
         self.historyDate.setClearButtonEnabled(False)
         self.historyDate.setObjectName("historyDate")
@@ -825,8 +858,8 @@ class Ui_RTFNetwork(object):
         self.ExitCache.setGeometry(QtCore.QRect(1860, 20, 40, 40))
         self.ExitCache.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.ExitCache.setStyleSheet("QPushButton{\n"
-"border-radius: 1px\n"
-"}")
+                                     "border-radius: 1px\n"
+                                     "}")
         self.ExitCache.setText("")
         self.ExitCache.setIcon(icon)
         self.ExitCache.setIconSize(QtCore.QSize(40, 40))
@@ -851,13 +884,13 @@ class Ui_RTFNetwork(object):
         self.ToAuntificatoinFromReg.setGeometry(QtCore.QRect(200, 100, 50, 50))
         self.ToAuntificatoinFromReg.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.ToAuntificatoinFromReg.setStyleSheet("QPushButton{\n"
-"position: absolute;\n"
-"width: 50px;\n"
-"height: 50px;\n"
-"left: 200px;\n"
-"top: 100px;\n"
-"border-radius: 15px;\n"
-"}")
+                                                  "position: absolute;\n"
+                                                  "width: 50px;\n"
+                                                  "height: 50px;\n"
+                                                  "left: 200px;\n"
+                                                  "top: 100px;\n"
+                                                  "border-radius: 15px;\n"
+                                                  "}")
         self.ToAuntificatoinFromReg.setText("")
         self.ToAuntificatoinFromReg.setIcon(icon8)
         self.ToAuntificatoinFromReg.setIconSize(QtCore.QSize(75, 75))
@@ -866,15 +899,16 @@ class Ui_RTFNetwork(object):
         self.BackReg2 = QtWidgets.QLabel(self.Registration)
         self.BackReg2.setGeometry(QtCore.QRect(660, 190, 600, 700))
         self.BackReg2.setStyleSheet("QLabel{\n"
-"position: absolute;\n"
-"width: 600px;\n"
-"height: 700px;\n"
-"left: calc(50% - 600px/2);\n"
-"top: 190px;\n"
-"\n"
-"background:qlineargradient(spread:pad, x1:0.09, y1:0.085, x2:1, y2:1, stop:0 rgba(226, 235, 255, 255), stop:1 rgba(123, 119, 166, 255));\n"
-"border-radius: 30px;\n"
-"}")
+                                    "position: absolute;\n"
+                                    "width: 600px;\n"
+                                    "height: 700px;\n"
+                                    "left: calc(50% - 600px/2);\n"
+                                    "top: 190px;\n"
+                                    "\n"
+                                    "background:qlineargradient(spread:pad, x1:0.09, y1:0.085, x2:1, y2:1, "
+                                    "stop:0 rgba(226, 235, 255, 255), stop:1 rgba(123, 119, 166, 255));\n "
+                                    "border-radius: 30px;\n"
+                                    "}")
         self.BackReg2.setText("")
         self.BackReg2.setScaledContents(False)
         self.BackReg2.setObjectName("BackReg2")
@@ -903,19 +937,19 @@ class Ui_RTFNetwork(object):
         self.UsernameEntrer.setToolTipDuration(3)
         self.UsernameEntrer.setAutoFillBackground(False)
         self.UsernameEntrer.setStyleSheet("QLineEdit {\n"
-"position: absolute;\n"
-"width: 450px;\n"
-"height: 75px;\n"
-"left: 735px;\n"
-"top: 550px;\n"
-"padding-left: 80px;\n"
-"padding-right: 20px;\n"
-"\n"
-"background: #FFFFFF;\n"
-"border: 1px solid #C4C4C4;\n"
-"box-sizing: border-box;\n"
-"border-radius: 10px;\n"
-"}")
+                                          "position: absolute;\n"
+                                          "width: 450px;\n"
+                                          "height: 75px;\n"
+                                          "left: 735px;\n"
+                                          "top: 550px;\n"
+                                          "padding-left: 80px;\n"
+                                          "padding-right: 20px;\n"
+                                          "\n"
+                                          "background: #FFFFFF;\n"
+                                          "border: 1px solid #C4C4C4;\n"
+                                          "box-sizing: border-box;\n"
+                                          "border-radius: 10px;\n"
+                                          "}")
         self.UsernameEntrer.setText("")
         self.UsernameEntrer.setCursorPosition(0)
         self.UsernameEntrer.setCursorMoveStyle(QtCore.Qt.LogicalMoveStyle)
@@ -935,19 +969,19 @@ class Ui_RTFNetwork(object):
         self.LoginEnter.setToolTipDuration(3)
         self.LoginEnter.setAutoFillBackground(False)
         self.LoginEnter.setStyleSheet("QLineEdit {\n"
-"position: absolute;\n"
-"width: 450px;\n"
-"height: 75px;\n"
-"left: 735px;\n"
-"top: 550px;\n"
-"padding-left: 80px;\n"
-"padding-right: 20px;\n"
-"\n"
-"background: #FFFFFF;\n"
-"border: 1px solid #C4C4C4;\n"
-"box-sizing: border-box;\n"
-"border-radius: 10px;\n"
-"}")
+                                      "position: absolute;\n"
+                                      "width: 450px;\n"
+                                      "height: 75px;\n"
+                                      "left: 735px;\n"
+                                      "top: 550px;\n"
+                                      "padding-left: 80px;\n"
+                                      "padding-right: 20px;\n"
+                                      "\n"
+                                      "background: #FFFFFF;\n"
+                                      "border: 1px solid #C4C4C4;\n"
+                                      "box-sizing: border-box;\n"
+                                      "border-radius: 10px;\n"
+                                      "}")
         self.LoginEnter.setText("")
         self.LoginEnter.setCursorPosition(0)
         self.LoginEnter.setCursorMoveStyle(QtCore.Qt.LogicalMoveStyle)
@@ -967,19 +1001,19 @@ class Ui_RTFNetwork(object):
         self.PasswordEnter.setToolTipDuration(3)
         self.PasswordEnter.setAutoFillBackground(False)
         self.PasswordEnter.setStyleSheet("QLineEdit {\n"
-"position: absolute;\n"
-"width: 450px;\n"
-"height: 75px;\n"
-"left: 735px;\n"
-"top: 550px;\n"
-"padding-left: 80px;\n"
-"padding-right: 20px;\n"
-"\n"
-"background: #FFFFFF;\n"
-"border: 1px solid #C4C4C4;\n"
-"box-sizing: border-box;\n"
-"border-radius: 10px;\n"
-"}")
+                                         "position: absolute;\n"
+                                         "width: 450px;\n"
+                                         "height: 75px;\n"
+                                         "left: 735px;\n"
+                                         "top: 550px;\n"
+                                         "padding-left: 80px;\n"
+                                         "padding-right: 20px;\n"
+                                         "\n"
+                                         "background: #FFFFFF;\n"
+                                         "border: 1px solid #C4C4C4;\n"
+                                         "box-sizing: border-box;\n"
+                                         "border-radius: 10px;\n"
+                                         "}")
         self.PasswordEnter.setText("")
         self.PasswordEnter.setEchoMode(QtWidgets.QLineEdit.Password)
         self.PasswordEnter.setCursorPosition(0)
@@ -1005,49 +1039,51 @@ class Ui_RTFNetwork(object):
         self.RegBtn = QtWidgets.QPushButton(self.Registration)
         self.RegBtn.setGeometry(QtCore.QRect(710, 840, 500, 100))
         self.RegBtn.setStyleSheet("QPushButton {\n"
-"position: absolute;\n"
-"width: 350px;\n"
-"height: 100px;\n"
-"left: 785px;\n"
-"top: 800px;\n"
-"\n"
-"position: absolute;\n"
-"width: 136px;\n"
-"height: 55px;\n"
-"left: 892px;\n"
-"top: 823px;\n"
-"\n"
-"font-family: \'SF Pro Display\';\n"
-"font-style: italic;\n"
-"font-weight: 600;\n"
-"font-size: 46px;\n"
-"line-height: 55px;\n"
-"/* identical to box height */\n"
-"\n"
-"display: flex;\n"
-"align-items: center;\n"
-"text-align: center;\n"
-"letter-spacing: 0.03em;\n"
-"\n"
-"color: #FFFFFF;\n"
-"\n"
-"background:qlineargradient(spread:pad, x1:0.169, y1:0.0180455, x2:0.791, y2:0.836, stop:0 rgba(105, 246, 255, 255), stop:1 rgba(67, 58, 166, 255));\n"
-"border: 1px solid #C4C4C4;\n"
-"box-sizing: border-box;\n"
-"border-radius: 25px;\n"
-"}\n"
-"\n"
-"QPushButton:pressed{\n"
-"    background-color:qlineargradient(spread:pad, x1:1, y1:0.478, x2:0, y2:0.466, stop:0 rgba(67, 58, 166, 255), stop:1 rgba(67, 58, 166, 255)); \n"
-"}")
+                                  "position: absolute;\n"
+                                  "width: 350px;\n"
+                                  "height: 100px;\n"
+                                  "left: 785px;\n"
+                                  "top: 800px;\n"
+                                  "\n"
+                                  "position: absolute;\n"
+                                  "width: 136px;\n"
+                                  "height: 55px;\n"
+                                  "left: 892px;\n"
+                                  "top: 823px;\n"
+                                  "\n"
+                                  "font-family: \'SF Pro Display\';\n"
+                                  "font-style: italic;\n"
+                                  "font-weight: 600;\n"
+                                  "font-size: 46px;\n"
+                                  "line-height: 55px;\n"
+                                  "/* identical to box height */\n"
+                                  "\n"
+                                  "display: flex;\n"
+                                  "align-items: center;\n"
+                                  "text-align: center;\n"
+                                  "letter-spacing: 0.03em;\n"
+                                  "\n"
+                                  "color: #FFFFFF;\n"
+                                  "\n"
+                                  "background:qlineargradient(spread:pad, x1:0.169, y1:0.0180455, x2:0.791, y2:0.836, "
+                                  "stop:0 rgba(105, 246, 255, 255), stop:1 rgba(67, 58, 166, 255));\n "
+                                  "border: 1px solid #C4C4C4;\n"
+                                  "box-sizing: border-box;\n"
+                                  "border-radius: 25px;\n"
+                                  "}\n"
+                                  "\n"
+                                  "QPushButton:pressed{\n"
+                                  "background-color:qlineargradient(spread:pad, x1:1, y1:0.478, x2:0, y2:0.466, "
+                                  "stop:0 rgba(67, 58, 166, 255), stop:1 rgba(67, 58, 166, 255)); \n "
+                                  "}")
         self.RegBtn.setFlat(False)
         self.RegBtn.setObjectName("RegBtn")
         self.ExitRegistration = QtWidgets.QPushButton(self.Registration)
         self.ExitRegistration.setGeometry(QtCore.QRect(1860, 20, 40, 40))
         self.ExitRegistration.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.ExitRegistration.setStyleSheet("QPushButton{\n"
-"border-radius: 1px\n"
-"}")
+                                            "border-radius: 1px\n"
+                                            "}")
         self.ExitRegistration.setText("")
         self.ExitRegistration.setIcon(icon)
         self.ExitRegistration.setIconSize(QtCore.QSize(40, 40))
@@ -1064,25 +1100,29 @@ class Ui_RTFNetwork(object):
         self.ThisUserWrong = QtWidgets.QLineEdit(self.WrongReg)
         self.ThisUserWrong.setGeometry(QtCore.QRect(0, 10, 411, 22))
         self.ThisUserWrong.setStyleSheet("QLineEdit{\n"
-"position: absolute;\n"
-"width: 352px;\n"
-"height: 24px;\n"
-"left: 786px;\n"
-"top: 744px;\n"
-"\n"
-"font-family: \'SF Pro Display\';\n"
-"font-style: italic;\n"
-"font-weight: 300;\n"
-"font-size: 20px;\n"
-"line-height: 24px;\n"
-"/* identical to box height */\n"
-"\n"
-"display: flex;\n"
-"align-items: center;\n"
-"padding-left: 15px;\n"
-"color: #FF0000;\n"
-"background:qradialgradient(spread:pad, cx:0.6, cy:0.829545, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 235, 235, 0), stop:0.35 rgba(255, 188, 188, 0), stop:0.517413 rgba(252, 128, 128, 0), stop:0.721393 rgba(255, 132, 132, 0), stop:0.865672 rgba(255, 162, 162, 0), stop:1 rgba(255, 255, 255, 0));\n"
-"}")
+                                         "position: absolute;\n"
+                                         "width: 352px;\n"
+                                         "height: 24px;\n"
+                                         "left: 786px;\n"
+                                         "top: 744px;\n"
+                                         "\n"
+                                         "font-family: \'SF Pro Display\';\n"
+                                         "font-style: italic;\n"
+                                         "font-weight: 300;\n"
+                                         "font-size: 20px;\n"
+                                         "line-height: 24px;\n"
+                                         "/* identical to box height */\n"
+                                         "\n"
+                                         "display: flex;\n"
+                                         "align-items: center;\n"
+                                         "padding-left: 15px;\n"
+                                         "color: #FF0000;\n"
+                                         "background:qradialgradient(spread:pad, cx:0.6, cy:0.829545, radius:0.5, "
+                                         "fx:0.5, fy:0.5, stop:0 rgba(255, 235, 235, 0), stop:0.35 rgba(255, 188, "
+                                         "188, 0), stop:0.517413 rgba(252, 128, 128, 0), stop:0.721393 rgba(255, 132, "
+                                         "132, 0), stop:0.865672 rgba(255, 162, 162, 0), stop:1 rgba(255, 255, 255, "
+                                         "0));\n "
+                                         "}")
         self.ThisUserWrong.setFrame(False)
         self.ThisUserWrong.setReadOnly(True)
         self.ThisUserWrong.setObjectName("ThisUserWrong")
@@ -1102,16 +1142,16 @@ class Ui_RTFNetwork(object):
         self.ExitRegistration.raise_()
         self.stackedWidget_3.raise_()
         self.stackedWidget.addWidget(self.Registration)
-        RTFNetwork.setCentralWidget(self.centralwidget)
+        rtf_network.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(RTFNetwork)
+        self.retranslate_ui(rtf_network)
         self.stackedWidget.setCurrentIndex(4)
         self.stackedWidget_3.setCurrentIndex(1)
-        QtCore.QMetaObject.connectSlotsByName(RTFNetwork)
+        QtCore.QMetaObject.connectSlotsByName(rtf_network)
 
-    def retranslateUi(self, RTFNetwork):
+    def retranslate_ui(self, rtf_network):
         _translate = QtCore.QCoreApplication.translate
-        RTFNetwork.setWindowTitle(_translate("RTFNetwork", "RTFNetwork"))
+        rtf_network.setWindowTitle(_translate("RTFNetwork", "RTFNetwork"))
         self.OutorIn.setText(_translate("RTFNetwork", "Войти"))
         self.Login.setPlaceholderText(_translate("RTFNetwork", "Логин"))
         self.Password.setPlaceholderText(_translate("RTFNetwork", "Пароль"))
@@ -1128,5 +1168,3 @@ class Ui_RTFNetwork(object):
 
 def md5sum(value):
     return hashlib.md5(value.encode()).hexdigest()
-
-
