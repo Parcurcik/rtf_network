@@ -20,26 +20,40 @@ from design import *
 class MainWindow:
     def __init__(self):
         self.main_win = QMainWindow()
-        self.ui = UiRTFNetwork()
+        self.ui = Ui_RTFNetwork()
         self.main_win.showFullScreen()
+        # Login
         self.ui.setup_ui(self.main_win)
         self.ui.stackedWidget.setCurrentWidget(self.ui.Auntification)
         self.ui.OutorIn.clicked.connect(self.log_in)
+        # MainMenu
+        self.ui.toMenuFromParking.clicked.connect(self.show_main)
         self.ui.toMenuFromFAQ.clicked.connect(self.show_main)
         self.ui.toMenuFromCamera.clicked.connect(self.show_main)
+        self.ui.toMenuFromCache.clicked.connect(self.show_main)
+        self.ui.toMenuFromNumbers.clicked.connect(self.show_main)
+        # Buttons to sections
         self.ui.FAQ_btn.clicked.connect(self.show_faq)
         self.ui.Camera_btn.clicked.connect(self.show_camera)
+        self.ui.Parking_btn.clicked.connect(self.show_parking)
+        self.ui.Number_btn.clicked.connect(self.show_numbers)
+        self.ui.Data_btn.clicked.connect(self.show_cache)
+        # Buttons to exit
         self.ui.ExitFAQ.clicked.connect(QApplication.instance().quit)
+        self.ui.ExitParking.clicked.connect(QApplication.instance().quit)
+        self.ui.ExitNumbers.clicked.connect(QApplication.instance().quit)
+        self.ui.ExitCache.clicked.connect(QApplication.instance().quit)
         self.ui.ExitAuntification.clicked.connect(QApplication.instance().quit)
         self.ui.ExitMenu.clicked.connect(QApplication.instance().quit)
         self.ui.ExitCamera.clicked.connect(QApplication.instance().quit)
         self.ui.ExitRegistration.clicked.connect(QApplication.instance().quit)
+        # Registration
         self.ui.RegistrationButton.clicked.connect(self.show_registration)
         self.ui.ToAuntificatoinFromReg.clicked.connect(self.show_auntification)
         self.ui.RegBtn.clicked.connect(self.registration)
-        self.timer = QTimer()  # Таймер для камеры
-        self.timer.timeout.connect(self.camera_on)  # Подключаем камеру
-        self.ui.Camera_btn.clicked.connect(self.control_timer)  # Визуализация включение камеры
+        self.timer = QTimer()  # Timer for Camera
+        self.timer.timeout.connect(self.camera_on)  # Connect camera
+        self.ui.Camera_btn.clicked.connect(self.control_timer)  # Visualization of camera
 
     def camera_on(self):
         ret, image = self.cap.read()
@@ -81,8 +95,17 @@ class MainWindow:
     def show_faq(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.FAQ)
 
+    def show_numbers(self):
+        self.ui.stackedWidget.setCurrentWidget(self.ui.Numbers)
+
+    def show_parking(self):
+        self.ui.stackedWidget.setCurrentWidget(self.ui.Parking)
+
     def show_camera(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.Camera)
+
+    def show_cache(self):
+        self.ui.stackedWidget.setCurrentWidget(self.ui.Cache)
 
     def show_registration(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.Registration)
