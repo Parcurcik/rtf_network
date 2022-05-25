@@ -6,14 +6,23 @@ from sqlite3 import Cursor, Connection
 
 import cv2
 
+import pytesseract
+
+from datetime import datetime
+
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia, QtMultimediaWidgets
 from PyQt5.QtMultimedia import QMediaContent
 from PyQt5.QtMultimediaWidgets import QVideoWidget
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtCore import QTimer
-from PyQt5.QtGui import QImage
+from PyQt5.QtGui import *
 from PyQt5.QtGui import QPixmap
 
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.Qt import *
 from design import *
 
 
@@ -51,37 +60,28 @@ class MainWindow:
         self.ui.RegistrationButton.clicked.connect(self.show_registration)
         self.ui.ToAuntificatoinFromReg.clicked.connect(self.show_auntification)
         self.ui.RegBtn.clicked.connect(self.registration)
-        self.timer = QTimer()  # Timer for Camera
-        self.timer.timeout.connect(self.camera_on)  # Connect camera
-        self.ui.Camera_btn.clicked.connect(self.control_timer)  # Visualization of camera
+        # Camera settings
+        self.PredictNumber = PredictNumber()
+        self.PredictNumber.ImageUpdate.connect(self.image_update_slot)
+        self.ui.Camera_btn.clicked.connect(self.PredictNumber.start)
+        # Timer
+        self.temp = 0
+        self.ui.OutorIn.clicked.connect(self.start_timer)
+        self.timer = QtCore.QTimer()
+        self.timer.setInterval(1000)
+        self.timer.timeout.connect(self.display_time)
 
-    def camera_on(self):
-        ret, image = self.cap.read()
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        height, width, channel = image.shape
-        step = channel * width
-        img = QImage(image.data, width, height, step, QImage.Format_RGB888)
-        self.ui.Cam.setPixmap(QPixmap.fromImage(img))
+    def start_timer(self):
+        self.timer.start()
+
+    def display_time(self):
+        f_temp = datetime.utcfromtimestamp(self.temp).strftime("%H:%M:%S")
+        self.ui.TimerMenu.setText(f_temp)
+        self.temp += 1
+
+    def image_update_slot(self, image):
+        self.ui.Cam.setPixmap(QPixmap.fromImage(image))
         self.ui.Cam.setScaledContents(True)
-
-    def control_timer(self):
-        if not self.timer.isActive():
-            self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
-            self.timer.start(0)
-
-    def network(self):
-        # ret, frame = video_capture.read()
-        # gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        face_cascade = cv2.CascadeClassifier('cascade/haarcascade_russian_plate_number.xml')
-        plaques = face_cascade.detectMultiScale(gray, 1.3, 5)
-        for i, (x, y, w, h) in enumerate(plaques):
-            roi_color = frame[y:y + h, x:x + w]
-            r = 400.0 / roi_color.shape[1]
-            dim = (400, int(roi_color.shape[0] * r))
-            resized = cv2.resize(roi_color, dim, interpolation=cv2.INTER_AREA)
-            w_resized = resized.shape[0]
-            h_resized = resized.shape[1]
-            frame[100:100 + w_resized, 100:100 + h_resized] = resized
 
     def play(self):
         self.media.play()
@@ -165,6 +165,36 @@ class MainWindow:
         finally:
             cursor.close()
             db.close()
+
+
+class PredictNumber(QThread):
+    ImageUpdate = pyqtSignal(QImage)
+
+    def run(self):
+        self.ThreadActive = True
+        capture = cv2.VideoCapture(0)
+        while self.ThreadActive:
+            face_cascade = cv2.CascadeClassifier('cascade/haarcascade_russian_plate_number.xml')
+            pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+            ret, frame = capture.read()
+            if ret:
+                image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                with_cascade = face_cascade.detectMultiScale(image, 1.3, 7)
+                for i, (x, y, w, h) in enumerate(with_cascade):
+                    roi_color = image[y:y + h, x:x + w]
+                    r = 300.0 / roi_color.shape[1]
+                    dim = (400, int(roi_color.shape[0] * r))
+                    resized = cv2.resize(roi_color, dim, interpolation=cv2.INTER_AREA)
+                    w_resized = resized.shape[0]
+                    h_resized = resized.shape[1]
+                    image[380:380 + w_resized, 235:235 + h_resized] = resized
+                convert_to_qt_format = QImage(image.data, image.shape[1], image.shape[0], QImage.Format_RGB888)
+                self.ImageUpdate.emit(convert_to_qt_format)
+
+
+
+
+
 
 
 if __name__ == '__main__':

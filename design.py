@@ -389,6 +389,22 @@ class Ui_RTFNetwork(object):
         self.ExitMenu.setIconSize(QtCore.QSize(40, 40))
         self.ExitMenu.setFlat(True)
         self.ExitMenu.setObjectName("ExitMenu")
+        self.TimerMenu = QtWidgets.QLabel(self.Menu)
+        self.TimerMenu.setGeometry(QtCore.QRect(310, 240, 229, 38))
+        font = QtGui.QFont()
+        font.setFamily("SF Pro Display")
+        font.setPointSize(20)
+        font.setBold(False)
+        font.setItalic(True)
+        font.setWeight(50)
+        self.TimerMenu.setFont(font)
+        self.TimerMenu.setStyleSheet("QLineEdit {\n"
+                                     "\n"
+                                     "background:rgb(240, 240, 240)\n"
+                                     "\n"
+                                     "}")
+        self.TimerMenu.setAlignment(QtCore.Qt.AlignCenter)
+        self.TimerMenu.setObjectName("TimerMenu")
         self.stackedWidget.addWidget(self.Menu)
         self.FAQ = QtWidgets.QWidget()
         self.FAQ.setObjectName("FAQ")
@@ -1156,7 +1172,8 @@ class Ui_RTFNetwork(object):
         self.Login.setPlaceholderText(_translate("RTFNetwork", "Логин"))
         self.Password.setPlaceholderText(_translate("RTFNetwork", "Пароль"))
         self.User.setText(_translate("RTFNetwork", "Довольный пользователь"))
-        self.Cam.setText(_translate("RTFNetwork", "TextLabel"))
+        self.TimerMenu.setText(_translate("RTFNetwork", "00:00:00"))
+        self.Cam.setText(_translate("RTFNetwork", ""))
         self.historyDate_2.setPlaceholderText(_translate("RTFNetwork", "Введите номер..."))
         self.historyDate.setPlaceholderText(_translate("RTFNetwork", "Введите число..."))
         self.UsernameEntrer.setPlaceholderText(_translate("RTFNetwork", "Имя Фамилия"))
