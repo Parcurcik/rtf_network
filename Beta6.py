@@ -5,9 +5,8 @@ import time
 from sqlite3 import Cursor, Connection
 
 import cv2
-
+import math
 import pytesseract
-
 from datetime import datetime
 
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia, QtMultimediaWidgets
@@ -70,6 +69,20 @@ class MainWindow:
         self.timer = QtCore.QTimer()
         self.timer.setInterval(1000)
         self.timer.timeout.connect(self.display_time)
+        # Cars
+        self.ui.Parking_btn.clicked.connect(self.replace_statistic)
+
+        # Number
+        self.ui.Number_btn.clicked.connect(self.clean_number)
+
+        # Cache
+        self.ui.Data_btn.clicked.connect(self.clean_data)
+
+    def clean_number(self):
+        self.ui.historyDate_2.setText("")
+
+    def clean_data(self):
+        self.ui.historyDate.setText("")
 
     def start_timer(self):
         self.timer.start()
@@ -166,6 +179,20 @@ class MainWindow:
             cursor.close()
             db.close()
 
+    def replace_statistic(self):
+        self.ui.countOfCarsInPark.setText(str(Cars.cars_count_in_park))
+        self.ui.countOfFreePark.setText(str(Cars.cars_count_out_park - Cars.cars_count_in_park))
+        self.ui.percentOfCarsInPark.setText(str(int(Cars.cars_count_percent_in_park)) + '%')
+        self.ui.percentOfFreePark.setText(str(int(Cars.cars_count_percent_out_park)) + '%')
+
+
+class Cars:
+    park_count = 333
+    cars_count_in_park = 33
+    cars_count_out_park = park_count
+    cars_count_percent_out_park = math.ceil((cars_count_out_park - cars_count_in_park) / (park_count * 0.01))
+    cars_count_percent_in_park = 100 - cars_count_percent_out_park
+
 
 class PredictNumber(QThread):
     ImageUpdate = pyqtSignal(QImage)
@@ -190,11 +217,6 @@ class PredictNumber(QThread):
                     image[380:380 + w_resized, 235:235 + h_resized] = resized
                 convert_to_qt_format = QImage(image.data, image.shape[1], image.shape[0], QImage.Format_RGB888)
                 self.ImageUpdate.emit(convert_to_qt_format)
-
-
-
-
-
 
 
 if __name__ == '__main__':
