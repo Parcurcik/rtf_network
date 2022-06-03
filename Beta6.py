@@ -19,9 +19,22 @@ from PyQt5.QtGui import QPixmap
 
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.Qt import *
+
+import tensorflow as tf
+from matplotlib import pyplot as plt
+import itertools
+from skimage.color import rgb2gray
+from skimage.feature import canny
+import matplotlib.pyplot as plt
+import numpy as np
+
+import os
+import tensorflow as tf
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '4'
+
+
 from design import *
 
 
@@ -62,6 +75,7 @@ class MainWindow:
         # Camera settings
         self.PredictNumber = PredictNumber()
         self.PredictNumber.ImageUpdate.connect(self.image_update_slot)
+        self.PredictNumber.NuberUpdate.connect(self.number_update_slot)
         self.ui.Camera_btn.clicked.connect(self.PredictNumber.start)
         # Timer
         self.temp = 0
@@ -95,6 +109,9 @@ class MainWindow:
     def image_update_slot(self, image):
         self.ui.Cam.setPixmap(QPixmap.fromImage(image))
         self.ui.Cam.setScaledContents(True)
+
+    def number_update_slot(self, number):
+        self.ui.predicted_number.setText(number)
 
     def play(self):
         self.media.play()
@@ -196,13 +213,14 @@ class Cars:
 
 class PredictNumber(QThread):
     ImageUpdate = pyqtSignal(QImage)
+    NuberUpdate = pyqtSignal(str)
 
     def run(self):
         self.ThreadActive = True
-        capture = cv2.VideoCapture(0)
+        capture = cv2.VideoCapture('Vidos/testVideo.mp4')
+        a = "Нет номера"
         while self.ThreadActive:
             face_cascade = cv2.CascadeClassifier('cascade/haarcascade_russian_plate_number.xml')
-            pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
             ret, frame = capture.read()
             if ret:
                 image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -215,8 +233,47 @@ class PredictNumber(QThread):
                     w_resized = resized.shape[0]
                     h_resized = resized.shape[1]
                     image[380:380 + w_resized, 235:235 + h_resized] = resized
+                    letters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'E', 'H', 'K', 'M', 'O',
+                               'P', 'T', 'X', 'Y']
+
+                    def decode_batch(out):
+                        ret = []
+                        for j in range(out.shape[0]):
+                            out_best = list(np.argmax(out[j, 2:], 1))
+                            out_best = [k for k, g in itertools.groupby(out_best)]
+                            outstr = ''
+                            for c in out_best:
+                                if c < len(letters):
+                                    outstr += letters[c]
+                            ret.append(outstr)
+                        return ret
+
+                    paths = 'model1_nomer.tflite' # add tf model
+                    interpreter = tf.lite.Interpreter(model_path=paths)
+                    interpreter.allocate_tensors()
+                    # Get input and output tensors.
+                    input_details = interpreter.get_input_details()
+                    output_details = interpreter.get_output_details()
+                    img = resized
+                    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+                    img = cv2.resize(img, (128, 64))
+                    img = img.astype(np.float32)
+                    img /= 255
+                    img1 = img.T
+                    img1.shape
+                    X_data1 = np.float32(img1.reshape(1, 128, 64, 1))
+                    interpreter.set_tensor(input_details[0]['index'], X_data1)
+                    interpreter.invoke()
+                    net_out_value = interpreter.get_tensor(output_details[0]['index'])
+                    pred_texts = decode_batch(net_out_value)
+                    if a != pred_texts:
+                        a = pred_texts
+                        a = " ".join(a)
+                conv_to_qt = str(a)
                 convert_to_qt_format = QImage(image.data, image.shape[1], image.shape[0], QImage.Format_RGB888)
                 self.ImageUpdate.emit(convert_to_qt_format)
+                self.NuberUpdate.emit(conv_to_qt)
+                self.msleep(10)
 
 
 if __name__ == '__main__':
