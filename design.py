@@ -1195,6 +1195,7 @@ class Ui_RTFNetwork(object):
         self.Password.setPlaceholderText(_translate("RTFNetwork", "Пароль"))
         self.User.setText(_translate("RTFNetwork", "Довольный пользователь"))
         self.TimerMenu.setText(_translate("RTFNetwork", "00:00:00"))
+        self.predicted_number.setText("Нет номера")
         self.Cam.setText(_translate("RTFNetwork", ""))
         self.UsernameEntrer.setPlaceholderText(_translate("RTFNetwork", "Имя Фамилия"))
         self.LoginEnter.setPlaceholderText(_translate("RTFNetwork", "Логин"))
