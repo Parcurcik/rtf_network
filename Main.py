@@ -1,6 +1,7 @@
 import sys
 import sqlite3
 import time
+import os
 
 from sqlite3 import Cursor, Connection
 
@@ -27,13 +28,8 @@ from matplotlib import pyplot as plt
 import itertools
 from skimage.color import rgb2gray
 from skimage.feature import canny
-import matplotlib.pyplot as plt
+
 import numpy as np
-
-import os
-import tensorflow as tf
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '4'
-
 
 from design import *
 
@@ -88,7 +84,6 @@ class MainWindow:
         self.ui.searchButton.clicked.connect(self.search_number)
 
         # Cache
-
 
     def clean_number(self):
         self.ui.historyDate_2.setText("")
@@ -148,7 +143,7 @@ class MainWindow:
         username = self.ui.UsernameEntrer.text()
 
         try:
-            data_base = sqlite3.connect("database.db")
+            data_base = sqlite3.connect("dataBases/database.db")
             cursor = data_base.cursor()
 
             data_base.create_function("MD5", 1, md5sum)
@@ -175,7 +170,7 @@ class MainWindow:
         password = self.ui.Password.text()
 
         try:
-            db = sqlite3.connect("database.db")
+            db = sqlite3.connect("DataBases/database.db")
             cursor = db.cursor()
             cursor.execute("SELECT login FROM  users WHERE login = ?", [login])
             if cursor.fetchone() is None:
@@ -201,7 +196,7 @@ class MainWindow:
 
     def cars_work(self, number):
         try:
-            db = sqlite3.connect("NUM_DB.db")
+            db = sqlite3.connect("dataBases/NUM_DB.db")
             cursor = db.cursor()
 
             cursor.execute("SELECT number FROM num_db WHERE number = ?", [number])
@@ -236,11 +231,11 @@ class PredictNumber(QThread):
     def run(self):
         number = ""
         self.ThreadActive = True
-        capture = cv2.VideoCapture('Vidos/testVideo.mp4')
+        capture = cv2.VideoCapture('testVideo/1.mp4')
         a = "Нет номера"
         main_win.ui.NumberText.setText("Нет номера")
         while self.ThreadActive:
-            face_cascade = cv2.CascadeClassifier('cascade/haarcascade_russian_plate_number.xml')
+            face_cascade = cv2.CascadeClassifier('networks/cascadeToNumberPlates.xml')
             ret, frame = capture.read()
             if ret:
                 image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -268,7 +263,7 @@ class PredictNumber(QThread):
                             ret.append(outstr)
                         return ret
 
-                    paths = 'model1_nomer.tflite' # add tf model
+                    paths = "networks/tesseractNumbers.tflite"
                     interpreter = tf.lite.Interpreter(model_path=paths)
                     interpreter.allocate_tensors()
                     # Get input and output tensors.
