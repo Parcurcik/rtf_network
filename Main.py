@@ -51,19 +51,16 @@ class MainWindow:
         self.ui.toMenuFromParking.clicked.connect(self.show_main)
         self.ui.toMenuFromFAQ.clicked.connect(self.show_main)
         self.ui.toMenuFromCamera.clicked.connect(self.show_main)
-        self.ui.toMenuFromCache.clicked.connect(self.show_main)
         self.ui.toMenuFromNumbers.clicked.connect(self.show_main)
         # Buttons to sections
         self.ui.FAQ_btn.clicked.connect(self.show_faq)
         self.ui.Camera_btn.clicked.connect(self.show_camera)
         self.ui.Parking_btn.clicked.connect(self.show_parking)
         self.ui.Number_btn.clicked.connect(self.show_numbers)
-        self.ui.Data_btn.clicked.connect(self.show_cache)
         # Buttons to exit
         self.ui.ExitFAQ.clicked.connect(QApplication.instance().quit)
         self.ui.ExitParking.clicked.connect(QApplication.instance().quit)
         self.ui.ExitNumbers.clicked.connect(QApplication.instance().quit)
-        self.ui.ExitCache.clicked.connect(QApplication.instance().quit)
         self.ui.ExitAuntification.clicked.connect(QApplication.instance().quit)
         self.ui.ExitMenu.clicked.connect(QApplication.instance().quit)
         self.ui.ExitCamera.clicked.connect(QApplication.instance().quit)
@@ -75,8 +72,8 @@ class MainWindow:
         # Camera settings
         self.PredictNumber = PredictNumber()
         self.PredictNumber.ImageUpdate.connect(self.image_update_slot)
-        self.PredictNumber.NuberUpdate.connect(self.number_update_slot)
         self.ui.Camera_btn.clicked.connect(self.PredictNumber.start)
+        self.ui.Camera_btn.clicked.connect(self.cars_work)
         # Timer
         self.temp = 0
         self.ui.OutorIn.clicked.connect(self.start_timer)
@@ -88,15 +85,14 @@ class MainWindow:
 
         # Number
         self.ui.Number_btn.clicked.connect(self.clean_number)
+        self.ui.searchButton.clicked.connect(self.search_number)
 
         # Cache
-        self.ui.Data_btn.clicked.connect(self.clean_data)
+
 
     def clean_number(self):
         self.ui.historyDate_2.setText("")
-
-    def clean_data(self):
-        self.ui.historyDate.setText("")
+        self.ui.SWNumberCar.setCurrentWidget(self.ui.NaNpage)
 
     def start_timer(self):
         self.timer.start()
@@ -110,11 +106,14 @@ class MainWindow:
         self.ui.Cam.setPixmap(QPixmap.fromImage(image))
         self.ui.Cam.setScaledContents(True)
 
-    def number_update_slot(self, number):
-        self.ui.predicted_number.setText(number)
-
     def play(self):
         self.media.play()
+
+    def search_number(self):
+        if self.ui.historyDate_2.text() in Cars.cars_arr:
+            self.ui.SWNumberCar.setCurrentWidget(self.ui.CurrentPage)
+        else:
+            self.ui.SWNumberCar.setCurrentWidget(self.ui.WrongPage)
 
     def show_main(self):
         self.ui.stackedWidget.setCurrentWidget(self.ui.Menu)
@@ -199,26 +198,47 @@ class MainWindow:
     def replace_statistic(self):
         self.ui.countOfCarsInPark.setText(str(Cars.cars_count_in_park))
         self.ui.countOfFreePark.setText(str(Cars.cars_count_out_park - Cars.cars_count_in_park))
-        self.ui.percentOfCarsInPark.setText(str(int(Cars.cars_count_percent_in_park)) + '%')
-        self.ui.percentOfFreePark.setText(str(int(Cars.cars_count_percent_out_park)) + '%')
+
+    def cars_work(self, number):
+        try:
+            db = sqlite3.connect("NUM_DB.db")
+            cursor = db.cursor()
+
+            cursor.execute("SELECT number FROM num_db WHERE number = ?", [number])
+            if cursor.fetchone() is None:
+                self.ui.NumberWidget.setCurrentWidget(self.ui.WrongNumber)
+            else:
+                self.ui.NumberWidget.setCurrentWidget(self.ui.RightNumber)
+                if number not in Cars.cars_arr:
+                    Cars.cars_arr.insert(Cars.increment, number)
+                    Cars.increment += 1
+                    Cars.cars_count_in_park += 1
+        except sqlite3.Error as e:
+            print("Error", e)
+        finally:
+            cursor.close()
+            db.close()
 
 
 class Cars:
-    park_count = 333
-    cars_count_in_park = 33
+    park_count = 100
+    cars_arr = [0] * park_count
     cars_count_out_park = park_count
-    cars_count_percent_out_park = math.ceil((cars_count_out_park - cars_count_in_park) / (park_count * 0.01))
-    cars_count_percent_in_park = 100 - cars_count_percent_out_park
+    cars_count_in_park = park_count - cars_count_out_park
+
+    increment = 0
 
 
 class PredictNumber(QThread):
     ImageUpdate = pyqtSignal(QImage)
-    NuberUpdate = pyqtSignal(str)
+    count_iterations = 1
 
     def run(self):
+        number = ""
         self.ThreadActive = True
         capture = cv2.VideoCapture('Vidos/testVideo.mp4')
         a = "Нет номера"
+        main_win.ui.NumberText.setText("Нет номера")
         while self.ThreadActive:
             face_cascade = cv2.CascadeClassifier('cascade/haarcascade_russian_plate_number.xml')
             ret, frame = capture.read()
@@ -269,10 +289,13 @@ class PredictNumber(QThread):
                     if a != pred_texts:
                         a = pred_texts
                         a = " ".join(a)
-                conv_to_qt = str(a)
                 convert_to_qt_format = QImage(image.data, image.shape[1], image.shape[0], QImage.Format_RGB888)
                 self.ImageUpdate.emit(convert_to_qt_format)
-                self.NuberUpdate.emit(conv_to_qt)
+                number = str(a)
+                PredictNumber.count_iterations += 1
+                if PredictNumber.count_iterations % 4 == 0:
+                    main_win.ui.NumberText.setText(number)
+                    MainWindow.cars_work(main_win, number)
                 self.msleep(10)
 
 

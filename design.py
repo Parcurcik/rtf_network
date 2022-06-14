@@ -269,31 +269,8 @@ class Ui_RTFNetwork(object):
         self.Parking_btn.setIcon(icon2)
         self.Parking_btn.setIconSize(QtCore.QSize(250, 250))
         self.Parking_btn.setObjectName("Parking_btn")
-        self.Data_btn = QtWidgets.QPushButton(self.Menu)
-        self.Data_btn.setGeometry(QtCore.QRect(1152, 415, 250, 250))
-        self.Data_btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.Data_btn.setStyleSheet("QPushButton{\n"
-                                    "position: absolute;\n"
-                                    "width: 250px;\n"
-                                    "height: 250px;\n"
-                                    "left: calc(50% - 250px/2 - 635px);\n"
-                                    "top: 415px;\n"
-                                    "border-radius: 30px;\n"
-                                    "background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, "
-                                    "stop:0 rgba(74, 137, 211, 0.9), stop:1 rgba(18, 27, 116, 0.9));\n "
-                                    "}\n"
-                                    "QPushButton:pressed{\n"
-                                    "background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, "
-                                    "stop:0 rgba(79, 85, 142, 255), stop:1 rgba(67, 58, 166, 255))\n "
-                                    "}")
-        self.Data_btn.setText("")
-        icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("images/Data.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.Data_btn.setIcon(icon3)
-        self.Data_btn.setIconSize(QtCore.QSize(250, 250))
-        self.Data_btn.setObjectName("Data_btn")
         self.Number_btn = QtWidgets.QPushButton(self.Menu)
-        self.Number_btn.setGeometry(QtCore.QRect(834, 415, 250, 250))
+        self.Number_btn.setGeometry(QtCore.QRect(1044, 415, 250, 250))
         self.Number_btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.Number_btn.setStyleSheet("QPushButton{\n"
                                       "position: absolute;\n"
@@ -317,7 +294,7 @@ class Ui_RTFNetwork(object):
         self.Number_btn.setIconSize(QtCore.QSize(250, 250))
         self.Number_btn.setObjectName("Number_btn")
         self.FAQ_btn = QtWidgets.QPushButton(self.Menu)
-        self.FAQ_btn.setGeometry(QtCore.QRect(1470, 415, 250, 250))
+        self.FAQ_btn.setGeometry(QtCore.QRect(1465, 415, 250, 250))
         self.FAQ_btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.FAQ_btn.setStyleSheet("QPushButton{\n"
                                    "position: absolute;\n"
@@ -340,7 +317,7 @@ class Ui_RTFNetwork(object):
         self.FAQ_btn.setIconSize(QtCore.QSize(250, 250))
         self.FAQ_btn.setObjectName("FAQ_btn")
         self.Camera_btn = QtWidgets.QPushButton(self.Menu)
-        self.Camera_btn.setGeometry(QtCore.QRect(517, 415, 250, 250))
+        self.Camera_btn.setGeometry(QtCore.QRect(622, 415, 250, 250))
         self.Camera_btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.Camera_btn.setStyleSheet("QPushButton{\n"
                                       "position: absolute;\n"
@@ -484,9 +461,9 @@ class Ui_RTFNetwork(object):
         self.ExitFAQ.setFlat(True)
         self.ExitFAQ.setObjectName("ExitFAQ")
         self.InstructionText = QtWidgets.QLabel(self.FAQ)
-        self.InstructionText.setGeometry(QtCore.QRect(557, 506, 806, 378))
+        self.InstructionText.setGeometry(QtCore.QRect(557, 514, 806, 232))
         self.InstructionText.setText("")
-        self.InstructionText.setPixmap(QtGui.QPixmap("images/instructionText.png"))
+        self.InstructionText.setPixmap(QtGui.QPixmap("images/FaqText.png"))
         self.InstructionText.setObjectName("InstructionText")
         self.stackedWidget.addWidget(self.FAQ)
         self.Camera = QtWidgets.QWidget()
@@ -533,17 +510,79 @@ class Ui_RTFNetwork(object):
         self.Cam = QtWidgets.QLabel(self.Camera)
         self.Cam.setGeometry(QtCore.QRect(340, 330, 781, 551))
         self.Cam.setObjectName("Cam")
-        self.predicted_number = QtWidgets.QLineEdit(self.Camera)
-        self.predicted_number.setGeometry(QtCore.QRect(1160, 520, 221, 31))
+        self.Cam.setPixmap(QtGui.QPixmap("images/Loading.png"))
+        self.Cam.setAlignment(QtCore.Qt.AlignCenter)
+        self.stackedWidget.addWidget(self.Camera)
+        self.NumberText = QtWidgets.QLineEdit(self.Camera)
+        self.NumberText.setGeometry(QtCore.QRect(1250, 540, 271, 51))
         font = QtGui.QFont()
         font.setFamily("SF Pro Display")
-        font.setPointSize(20)
-        self.predicted_number.setFont(font)
-        self.predicted_number.setInputMask("")
-        self.predicted_number.setText("")
-        self.predicted_number.setAlignment(QtCore.Qt.AlignCenter)
-        self.predicted_number.setObjectName("predicted_number")
-        self.predicted_number.setReadOnly(True)
+        font.setPointSize(18)
+        self.NumberText.setFont(font)
+        self.NumberText.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.NumberText.setStyleSheet("QLineEdit {\n"
+                                      "position: absolute;\n"
+                                      "width: 550px;\n"
+                                      "height: 75px;\n"
+                                      "left: calc(50% - 550px/2 + 385px);\n"
+                                      "top: 578px;\n"
+                                      "padding-right: 40px;\n"
+                                      "padding-left: 40px;\n"
+                                      "\n"
+                                      "background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0.826, y2:0.745364, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(67, 58, 166, 255));\n"
+                                      "border-radius: 15px;\n"
+                                      "\n"
+                                      "color: #FFFFFF;\n"
+                                      "}")
+        self.NumberText.setText("")
+        self.NumberText.setFrame(False)
+        self.NumberText.setReadOnly(True)
+        self.NumberText.setObjectName("NumberText")
+        self.NumberText.setAlignment(QtCore.Qt.AlignCenter)
+        self.NumberWidget = QtWidgets.QStackedWidget(self.Camera)
+        self.NumberWidget.setGeometry(QtCore.QRect(1250, 620, 271, 21))
+        self.NumberWidget.setObjectName("NumberWidget")
+        self.WrongNumber = QtWidgets.QWidget()
+        self.WrongNumber.setObjectName("WrongNumber")
+        self.WrongNumberText = QtWidgets.QLineEdit(self.WrongNumber)
+        self.WrongNumberText.setGeometry(QtCore.QRect(20, 0, 231, 21))
+        font = QtGui.QFont()
+        font.setFamily("SF Pro Display")
+        font.setBold(True)
+        font.setWeight(75)
+        self.WrongNumberText.setFont(font)
+        self.WrongNumberText.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.WrongNumberText.setStyleSheet("QLineEdit {\n"
+                                           "background:qradialgradient(spread:pad, cx:0.6, cy:0.829545, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 235, 235, 0), stop:0.35 rgba(255, 188, 188, 0), stop:0.517413 rgba(252, 128, 128, 0), stop:0.721393 rgba(255, 132, 132, 0), stop:0.865672 rgba(255, 162, 162, 0), stop:1 rgba(255, 255, 255, 0));\n"
+                                           "\n"
+                                           "color: #FF0000;\n"
+                                           "}")
+        self.WrongNumberText.setFrame(False)
+        self.WrongNumberText.setAlignment(QtCore.Qt.AlignCenter)
+        self.WrongNumberText.setReadOnly(True)
+        self.WrongNumberText.setObjectName("WrongNumberText")
+        self.NumberWidget.addWidget(self.WrongNumber)
+        self.RightNumber = QtWidgets.QWidget()
+        self.RightNumber.setObjectName("RightNumber")
+        self.RightNumberText = QtWidgets.QLineEdit(self.RightNumber)
+        self.RightNumberText.setGeometry(QtCore.QRect(20, 0, 231, 21))
+        font = QtGui.QFont()
+        font.setFamily("SF Pro Display")
+        font.setBold(True)
+        font.setWeight(75)
+        self.RightNumberText.setFont(font)
+        self.RightNumberText.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.RightNumberText.setStyleSheet(
+            "QLineEdit {\n"
+            "background:qradialgradient(spread:pad, cx:0.6, cy:0.829545, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 235, 235, 0), stop:0.35 rgba(255, 188, 188, 0), stop:0.517413 rgba(252, 128, 128, 0), stop:0.721393 rgba(255, 132, 132, 0), stop:0.865672 rgba(255, 162, 162, 0), stop:1 rgba(255, 255, 255, 0));\n"
+            "\n"
+            "color: #2aa11d;\n"
+            "}")
+        self.RightNumberText.setFrame(False)
+        self.RightNumberText.setAlignment(QtCore.Qt.AlignCenter)
+        self.RightNumberText.setReadOnly(True)
+        self.RightNumberText.setObjectName("RightNumberText")
+        self.NumberWidget.addWidget(self.RightNumber)
         self.stackedWidget.addWidget(self.Camera)
         self.Numbers = QtWidgets.QWidget()
         self.Numbers.setObjectName("Numbers")
@@ -552,6 +591,71 @@ class Ui_RTFNetwork(object):
         self.NumbersText.setText("")
         self.NumbersText.setPixmap(QtGui.QPixmap("images/NumbersText.svg"))
         self.NumbersText.setObjectName("NumbersText")
+        self.TextNum = QtWidgets.QLineEdit(self.Numbers)
+        self.TextNum.setGeometry(QtCore.QRect(800, 530, 351, 31))
+        font = QtGui.QFont()
+        font.setFamily("SF Pro Display")
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setWeight(50)
+        self.TextNum.setFont(font)
+        self.TextNum.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.TextNum.setStyleSheet("QLineEdit{\n"
+                                   "background:qradialgradient(spread:pad, cx:0.6, cy:0.829545, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 235, 235, 0), stop:0.35 rgba(255, 188, 188, 0), stop:0.517413 rgba(252, 128, 128, 0), stop:0.721393 rgba(255, 132, 132, 0), stop:0.865672 rgba(255, 162, 162, 0), stop:1 rgba(255, 255, 255, 0));\n"
+                                   "\n"
+                                   "}")
+        self.TextNum.setFrame(False)
+        self.TextNum.setAlignment(QtCore.Qt.AlignCenter)
+        self.TextNum.setReadOnly(True)
+        self.TextNum.setObjectName("TextNum")
+        self.SWNumberCar = QtWidgets.QStackedWidget(self.Numbers)
+        self.SWNumberCar.setGeometry(QtCore.QRect(685, 680, 541, 121))
+        self.SWNumberCar.setObjectName("SWNumberCar")
+        self.NaNpage = QtWidgets.QWidget()
+        self.NaNpage.setObjectName("NaNpage")
+        self.SWNumberCar.addWidget(self.NaNpage)
+        self.WrongPage = QtWidgets.QWidget()
+        self.WrongPage.setObjectName("WrongPage")
+        self.WrongPageText = QtWidgets.QLineEdit(self.WrongPage)
+        self.WrongPageText.setGeometry(QtCore.QRect(80, 10, 411, 91))
+        font = QtGui.QFont()
+        font.setFamily("SF Pro Display")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.WrongPageText.setFont(font)
+        self.WrongPageText.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.WrongPageText.setStyleSheet("QLineEdit {\n"
+                                         "background:qradialgradient(spread:pad, cx:0.6, cy:0.829545, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 235, 235, 0), stop:0.35 rgba(255, 188, 188, 0), stop:0.517413 rgba(252, 128, 128, 0), stop:0.721393 rgba(255, 132, 132, 0), stop:0.865672 rgba(255, 162, 162, 0), stop:1 rgba(255, 255, 255, 0));\n"
+                                         "\n"
+                                         "color: #FF0000;\n"
+                                         "}")
+        self.WrongPageText.setFrame(False)
+        self.WrongPageText.setAlignment(QtCore.Qt.AlignCenter)
+        self.WrongPageText.setReadOnly(True)
+        self.WrongPageText.setObjectName("WrongPageText")
+        self.SWNumberCar.addWidget(self.WrongPage)
+        self.CurrentPage = QtWidgets.QWidget()
+        self.CurrentPage.setObjectName("CurrentPage")
+        self.CurentPageText = QtWidgets.QLineEdit(self.CurrentPage)
+        self.CurentPageText.setGeometry(QtCore.QRect(80, 10, 411, 91))
+        font = QtGui.QFont()
+        font.setFamily("SF Pro Display")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.CurentPageText.setFont(font)
+        self.CurentPageText.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.CurentPageText.setStyleSheet("QLineEdit {\n"
+                                          "background:qradialgradient(spread:pad, cx:0.6, cy:0.829545, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(255, 235, 235, 0), stop:0.35 rgba(255, 188, 188, 0), stop:0.517413 rgba(252, 128, 128, 0), stop:0.721393 rgba(255, 132, 132, 0), stop:0.865672 rgba(255, 162, 162, 0), stop:1 rgba(255, 255, 255, 0));\n"
+                                          "\n"
+                                          "color: #2aa11d;\n"
+                                          "}")
+        self.CurentPageText.setFrame(False)
+        self.CurentPageText.setAlignment(QtCore.Qt.AlignCenter)
+        self.CurentPageText.setReadOnly(True)
+        self.CurentPageText.setObjectName("CurentPageText")
+        self.SWNumberCar.addWidget(self.CurrentPage)
         self.ExitNumbers = QtWidgets.QPushButton(self.Numbers)
         self.ExitNumbers.setGeometry(QtCore.QRect(1860, 20, 40, 40))
         self.ExitNumbers.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -585,7 +689,7 @@ class Ui_RTFNetwork(object):
         self.smallLogo_4.setPixmap(QtGui.QPixmap("images/smallLogo.png"))
         self.smallLogo_4.setObjectName("smallLogo_4")
         self.historyDate_2 = QtWidgets.QLineEdit(self.Numbers)
-        self.historyDate_2.setInputMask('>A-000-AA-000;#')
+        #self.historyDate_2.setInputMask('>A-000-AA-000;#')
         self.historyDate_2.setGeometry(QtCore.QRect(689, 616, 550, 75))
         font = QtGui.QFont()
         font.setFamily("SF Pro Display")
@@ -632,7 +736,7 @@ class Ui_RTFNetwork(object):
         self.searchButton.setIconSize(QtCore.QSize(40, 40))
         self.searchButton.setObjectName("searchButton")
         self.label = QtWidgets.QLabel(self.Numbers)
-        self.label.setGeometry(QtCore.QRect(850, 560, 248, 38))
+        self.label.setGeometry(QtCore.QRect(850, 460, 248, 38))
         self.label.setText("")
         self.label.setPixmap(QtGui.QPixmap("images/SearchText.svg"))
         self.label.setObjectName("label")
@@ -791,126 +895,6 @@ class Ui_RTFNetwork(object):
         self.percentOfFreePark.setAlignment(QtCore.Qt.AlignCenter)
         self.percentOfFreePark.setObjectName("percentOfFreePark")
         self.stackedWidget.addWidget(self.Parking)
-        self.Cache = QtWidgets.QWidget()
-        self.Cache.setObjectName("Cache")
-        self.toMenuFromCache = QtWidgets.QPushButton(self.Cache)
-        self.toMenuFromCache.setGeometry(QtCore.QRect(200, 100, 50, 50))
-        self.toMenuFromCache.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.toMenuFromCache.setStyleSheet("QPushButton{\n"
-                                           "position: absolute;\n"
-                                           "width: 50px;\n"
-                                           "height: 50px;\n"
-                                           "left: 200px;\n"
-                                           "top: 100px;\n"
-                                           "border-radius: 15px;\n"
-                                           "}")
-        self.toMenuFromCache.setText("")
-        self.toMenuFromCache.setIcon(icon10)
-        self.toMenuFromCache.setIconSize(QtCore.QSize(50, 50))
-        self.toMenuFromCache.setFlat(True)
-        self.toMenuFromCache.setObjectName("toMenuFromCache")
-        self.ButSave = QtWidgets.QPushButton(self.Cache)
-        self.ButSave.setGeometry(QtCore.QRect(1549, 595, 41, 41))
-        self.ButSave.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.ButSave.setText("")
-        icon11 = QtGui.QIcon()
-        icon11.addPixmap(QtGui.QPixmap("images/saver.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.ButSave.setIcon(icon11)
-        self.ButSave.setIconSize(QtCore.QSize(41, 41))
-        self.ButSave.setFlat(True)
-        self.ButSave.setObjectName("ButSave")
-        self.CleanCache = QtWidgets.QPushButton(self.Cache)
-        self.CleanCache.setGeometry(QtCore.QRect(400, 300, 500, 500))
-        self.CleanCache.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.CleanCache.setStyleSheet("QPushButton{\n"
-                                      "position: absolute;\n"
-                                      "border-radius: 250px;\n"
-                                      "min-height: 500px;\n"
-                                      "max-height: 500px;\n"
-                                      "min-width: 500px;\n"
-                                      "max-width: 500px;\n"
-                                      "background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, "
-                                      "stop:0 rgba(74, 137, 211, 0.9), stop:1 rgba(18, 27, 116, 0.9));\n "
-                                      "\n"
-                                      "}\n"
-                                      "QPushButton:pressed{\n"
-                                      "background:qlineargradient(spread:pad, x1:0, y1:0, x2:0.721348, y2:0.734, "
-                                      "stop:0 rgba(79, 85, 142, 255), stop:1 rgba(67, 58, 166, 255))\n "
-                                      "}\n"
-                                      "\n"
-                                      "")
-        self.CleanCache.setText("")
-        icon12 = QtGui.QIcon()
-        icon12.addPixmap(QtGui.QPixmap("images/cleanCache.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.CleanCache.setIcon(icon12)
-        self.CleanCache.setIconSize(QtCore.QSize(377, 120))
-        self.CleanCache.setCheckable(False)
-        self.CleanCache.setFlat(True)
-        self.CleanCache.setObjectName("CleanCache")
-        self.miniLogo2 = QtWidgets.QLabel(self.Cache)
-        self.miniLogo2.setGeometry(QtCore.QRect(1570, 100, 150, 150))
-        self.miniLogo2.setText("")
-        self.miniLogo2.setPixmap(QtGui.QPixmap("images/smallLogo.png"))
-        self.miniLogo2.setObjectName("miniLogo2")
-        self.textChoosePeriod = QtWidgets.QLabel(self.Cache)
-        self.textChoosePeriod.setGeometry(QtCore.QRect(1070, 490, 538, 38))
-        font = QtGui.QFont()
-        font.setFamily("SF Pro Display")
-        font.setPointSize(24)
-        font.setBold(True)
-        font.setWeight(75)
-        self.textChoosePeriod.setFont(font)
-        self.textChoosePeriod.setCursor(QtGui.QCursor(QtCore.Qt.SizeVerCursor))
-        self.textChoosePeriod.setText("")
-        self.textChoosePeriod.setPixmap(QtGui.QPixmap("images/choosePeriod.png"))
-        self.textChoosePeriod.setScaledContents(False)
-        self.textChoosePeriod.setObjectName("textChoosePeriod")
-        self.historyDate = QtWidgets.QLineEdit(self.Cache)
-        self.historyDate.setMaxLength(2)
-        self.historyDate.setGeometry(QtCore.QRect(1070, 578, 550, 75))
-        font = QtGui.QFont()
-        font.setFamily("SF Pro Display")
-        font.setPointSize(16)
-        font.setBold(True)
-        font.setWeight(75)
-        self.historyDate.setFont(font)
-        self.historyDate.setStyleSheet("QLineEdit {\n"
-                                       "position: absolute;\n"
-                                       "width: 550px;\n"
-                                       "height: 75px;\n"
-                                       "left: calc(50% - 550px/2 + 385px);\n"
-                                       "top: 578px;\n"
-                                       "padding-left: 40px;\n"
-                                       "padding-right: 80px;\n"
-                                       "\n"
-                                       "background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:0.826, "
-                                       "y2:0.745364, stop:0 rgba(85, 170, 255, 255), stop:1 rgba(67, 58, 166, 255));\n "
-                                       "border-radius: 15px;\n"
-                                       "\n"
-                                       "color: #FFFFFF;\n"
-                                       "}")
-        self.historyDate.setFrame(False)
-        self.historyDate.setClearButtonEnabled(False)
-        self.historyDate.setObjectName("historyDate")
-        self.ExitCache = QtWidgets.QPushButton(self.Cache)
-        self.ExitCache.setGeometry(QtCore.QRect(1860, 20, 40, 40))
-        self.ExitCache.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.ExitCache.setStyleSheet("QPushButton{\n"
-                                     "border-radius: 1px\n"
-                                     "}")
-        self.ExitCache.setText("")
-        self.ExitCache.setIcon(icon)
-        self.ExitCache.setIconSize(QtCore.QSize(40, 40))
-        self.ExitCache.setFlat(True)
-        self.ExitCache.setObjectName("ExitCache")
-        self.toMenuFromCache.raise_()
-        self.CleanCache.raise_()
-        self.miniLogo2.raise_()
-        self.textChoosePeriod.raise_()
-        self.historyDate.raise_()
-        self.ButSave.raise_()
-        self.ExitCache.raise_()
-        self.stackedWidget.addWidget(self.Cache)
         self.Registration = QtWidgets.QWidget()
         self.Registration.setObjectName("Registration")
         self.BackOfReg = QtWidgets.QLabel(self.Registration)
@@ -1189,20 +1173,23 @@ class Ui_RTFNetwork(object):
 
     def retranslate_ui(self, rtf_network):
         _translate = QtCore.QCoreApplication.translate
-        rtf_network.setWindowTitle(_translate("RTFNetwork", "RTFNetwork"))
-        self.OutorIn.setText(_translate("RTFNetwork", "Войти"))
-        self.Login.setPlaceholderText(_translate("RTFNetwork", "Логин"))
-        self.Password.setPlaceholderText(_translate("RTFNetwork", "Пароль"))
-        self.User.setText(_translate("RTFNetwork", "Довольный пользователь"))
-        self.TimerMenu.setText(_translate("RTFNetwork", "00:00:00"))
-        self.predicted_number.setText("Нет номера")
-        self.Cam.setText(_translate("RTFNetwork", ""))
-        self.UsernameEntrer.setPlaceholderText(_translate("RTFNetwork", "Имя Фамилия"))
-        self.LoginEnter.setPlaceholderText(_translate("RTFNetwork", "Логин"))
-        self.historyDate.setPlaceholderText("Введите количество месяцев");
-        self.PasswordEnter.setPlaceholderText(_translate("RTFNetwork", "Пароль"))
-        self.RegBtn.setText(_translate("RTFNetwork", "Зарегистрироваться"))
-        self.ThisUserWrong.setText(_translate("RTFNetwork", "Такой пользователь уже зарегистрирован!"))
+        rtf_network.setWindowTitle(_translate("rtf_network", "rtf_network"))
+        self.OutorIn.setText(_translate("rtf_network", "Войти"))
+        self.Login.setPlaceholderText(_translate("rtf_network", "Логин"))
+        self.Password.setPlaceholderText(_translate("rtf_network", "Пароль"))
+        self.User.setText(_translate("rtf_network", "Довольный пользователь"))
+        self.Cam.setText(_translate("rtf_network", ""))
+        self.WrongNumberText.setText(_translate("rtf_network", "Этого номера нет в базе данных!"))
+        self.RightNumberText.setText(_translate("rtf_network", "Этот номер есть в базе данных!"))
+        self.historyDate_2.setPlaceholderText(_translate("rtf_network", "Введите номер..."))
+        self.TextNum.setText(_translate("rtf_network", "P.S. Используйте латинские буквы в поиске"))
+        self.WrongPageText.setText(_translate("rtf_network", "Данного автомобиля нет на парковке!"))
+        self.CurentPageText.setText(_translate("rtf_network", "Данный автомобиль есть на парковке!"))
+        self.UsernameEntrer.setPlaceholderText(_translate("rtf_network", "Имя Фамилия"))
+        self.LoginEnter.setPlaceholderText(_translate("rtf_network", "Логин"))
+        self.PasswordEnter.setPlaceholderText(_translate("rtf_network", "Пароль"))
+        self.RegBtn.setText(_translate("rtf_network", "Зарегистрироваться"))
+        self.ThisUserWrong.setText(_translate("rtf_network", "Такой пользователь уже зарегистрирован!"))
 
 
 def md5sum(value):
