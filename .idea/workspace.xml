@@ -23,7 +23,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/pavel/OneDrive/Документы/GitHub/rtf_network/main.py"
+    "last_opened_file_path": "C:/Users/pavel/OneDrive/Документы/GitHub/rtf_network/main.py",
+    "settings.editor.selected.configurable": "preferences.fileTypes"
   }
 }]]></component>
   <component name="RunManager">
@@ -61,6 +62,7 @@
       <workItem from="1655199177619" duration="23000" />
       <workItem from="1655199211828" duration="145000" />
       <workItem from="1655199595924" duration="225000" />
+      <workItem from="1655199899684" duration="536000" />
     </task>
     <servers />
   </component>
