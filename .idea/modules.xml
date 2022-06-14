@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Qt beta.iml" filepath="$PROJECT_DIR$/.idea/Qt beta.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/rtf_network.iml" filepath="$PROJECT_DIR$/.idea/rtf_network.iml" />
     </modules>
   </component>
 </project>
