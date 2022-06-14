@@ -14,6 +14,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2AYv8WoZyOD80XzIDRkIKJZY3SM" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -64,6 +65,8 @@
       <workItem from="1655199595924" duration="225000" />
       <workItem from="1655199899684" duration="1246000" />
       <workItem from="1655202369125" duration="225000" />
+      <workItem from="1655202796429" duration="1317000" />
+      <workItem from="1655205439248" duration="102000" />
     </task>
     <servers />
   </component>
@@ -71,6 +74,6 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/main_py$Beta6.coverage" NAME="Beta6 Coverage Results" MODIFIED="1655200443024" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/main_py$Beta6.coverage" NAME="Beta6 Coverage Results" MODIFIED="1655205453428" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
