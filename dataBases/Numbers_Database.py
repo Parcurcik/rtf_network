@@ -8,7 +8,7 @@ with sqlite3.connect("NUM_DB.db") as db:
 	)""")
 
 	values = [
-		("Y535OP47",),
+		("K156KE196",),
 		("Y005OP47",)
 	]
 

@@ -7,7 +7,7 @@ from sqlite3 import Cursor, Connection
 
 import cv2
 import math
-import pytesseract
+
 from datetime import datetime
 
 from PyQt5 import QtCore, QtGui, QtWidgets, QtMultimedia, QtMultimediaWidgets
@@ -62,7 +62,6 @@ class MainWindow:
         self.ui.ExitCamera.clicked.connect(QApplication.instance().quit)
         self.ui.ExitRegistration.clicked.connect(QApplication.instance().quit)
         # Registration
-        self.ui.RegistrationButton.clicked.connect(self.show_registration)
         self.ui.ToAuntificatoinFromReg.clicked.connect(self.show_auntification)
         self.ui.RegBtn.clicked.connect(self.registration)
         # Camera settings
@@ -231,7 +230,7 @@ class PredictNumber(QThread):
     def run(self):
         number = ""
         self.ThreadActive = True
-        capture = cv2.VideoCapture('testVideo/1.mp4')
+        capture = cv2.VideoCapture('testVideo/3.mp4')
         a = "Нет номера"
         main_win.ui.NumberText.setText("Нет номера")
         while self.ThreadActive:
@@ -247,7 +246,7 @@ class PredictNumber(QThread):
                     resized = cv2.resize(roi_color, dim, interpolation=cv2.INTER_AREA)
                     w_resized = resized.shape[0]
                     h_resized = resized.shape[1]
-                    image[380:380 + w_resized, 235:235 + h_resized] = resized
+                    image[980:980 + w_resized, 1520:1520 + h_resized] = resized
                     letters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'E', 'H', 'K', 'M', 'O',
                                'P', 'T', 'X', 'Y']
 
